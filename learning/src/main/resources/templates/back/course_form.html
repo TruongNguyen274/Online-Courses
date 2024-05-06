@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Khóa Học | Online Learning Application</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"
+    />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{/resources/back/plugins/fontawesome-free/css/all.min.css}"/>
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"/>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link
+            rel="stylesheet"
+            th:href="@{/resources/back/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css}"
+    />
+    <!-- iCheck -->
+    <link rel="stylesheet" th:href="@{/resources/back/plugins/icheck-bootstrap/icheck-bootstrap.min.css}"/>
+    <!-- JQVMap -->
+    <link rel="stylesheet" th:href="@{/resources/back/plugins/jqvmap/jqvmap.min.css}"/>
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/resources/back/dist/css/adminlte.min.css}"/>
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" th:href="@{/resources/back/plugins/overlayScrollbars/css/OverlayScrollbars.min.css}"/>
+    <link rel="stylesheet" th:href="@{/resources/back/plugins/summernote/summernote-bs4.min.css}"/>
+    <!-- Daterange picker -->
+    <link rel="stylesheet" th:href="@{/resources/back/plugins/daterangepicker/daterangepicker.css}"/>
+    <!-- summernote -->
+    <link rel="stylesheet" th:href="@{/resources/back/plugins/summernote/summernote-bs4.min.css}"/>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+    <div th:replace="~{fragments/back/header :: header}"></div>
+
+    <div th:replace="~{fragments/back/sidebar :: sidebar}"></div>
+
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1></h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/back/dashboard">Trang Chủ</a></li>
+                            <li class="breadcrumb-item active">Quản Lý Khóa Học</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Thông Tin Khóa Học</h3>
+                            </div>
+
+                            <form
+                                    id="quickForm"
+                                    method="post"
+                                    th:action="@{/back/courses/form}"
+                                    th:object="${courseDTO}"
+                                    enctype="multipart/form-data"
+                            >
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div
+                                                class="alert alert-dismissible col-md-12"
+                                                th:if="${messageDTO != null && messageDTO.key == 'save'}"
+                                                th:classappend="${messageDTO.status == 'success' ? 'alert-success' : 'alert-warning'}"
+                                        >
+                                            <button
+                                                    type="button"
+                                                    class="close"
+                                                    data-dismiss="alert"
+                                                    aria-hidden="true"
+                                            >
+                                                &times;
+                                            </button>
+                                            <h5><i class="icon fas fa-exclamation-triangle"></i> Thông Báo</h5>
+                                            <span th:text="${messageDTO.message}"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="inputId">Mã Khóa Học</label>
+                                                <input
+                                                        type="text"
+                                                        name="id"
+                                                        th:field="*{id}"
+                                                        class="form-control"
+                                                        id="inputId"
+                                                        readonly
+                                                        disabled
+                                                />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputTitle">Tiêu Đề <code>(*)</code></label>
+                                                <input
+                                                        type="text"
+                                                        name="title"
+                                                        th:field="*{title}"
+                                                        class="form-control"
+                                                        th:classappend="${#fields.hasErrors('title')} ? 'is-invalid' : ''"
+                                                        id="inputTitle"
+                                                        placeholder="..."
+                                                />
+                                                <p
+                                                        class="text-danger"
+                                                        th:if="${#fields.hasErrors('title')}"
+                                                        th:errors="*{title}"
+                                                ></p>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputDuration">Thời Gian <code>(*)</code></label>
+                                                <input
+                                                        type="text"
+                                                        name="duration"
+                                                        th:field="*{duration}"
+                                                        class="form-control"
+                                                        th:classappend="${#fields.hasErrors('duration')} ? 'is-invalid' : ''"
+                                                        id="inputDuration"
+                                                        placeholder="..."
+                                                />
+                                                <p
+                                                        class="text-danger"
+                                                        th:if="${#fields.hasErrors('duration')}"
+                                                        th:errors="*{duration}"
+                                                ></p>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputPrice">Giá Tiền <code>(*)</code></label>
+                                                <input
+                                                        type="text"
+                                                        name="price"
+                                                        class="form-control"
+                                                        th:classappend="${#fields.hasErrors('price')} ? 'is-invalid' : ''"
+                                                        id="inputPrice"
+                                                        placeholder="..."
+                                                        th:field="*{price}"
+                                                />
+                                                <p
+                                                        class="text-danger"
+                                                        th:if="${#fields.hasErrors('price')}"
+                                                        th:errors="*{price}"
+                                                ></p>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputDiscount">Giảm Giá (%)</label>
+                                                <input
+                                                        type="text"
+                                                        name="discount"
+                                                        th:field="*{discount}"
+                                                        class="form-control"
+                                                        id="inputDiscount"
+                                                        placeholder="..."
+                                                />
+                                                <p
+                                                        class="text-danger"
+                                                        th:if="${#fields.hasErrors('discount')}"
+                                                        th:errors="*{discount}"
+                                                ></p>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputCategory"
+                                                >Loại Danh Mục <code>(*)</code></label
+                                                >
+                                                <select
+                                                        class="form-control select2"
+                                                        id="inputCategory"
+                                                        style="width: 100%"
+                                                        th:classappend="${#fields.hasErrors('categoryId')} ? 'is-invalid' : ''"
+                                                        th:field="*{categoryId}"
+                                                >
+                                                    <option th:value="0">Chọn Loại Danh Mục...</option>
+                                                    <option
+                                                            th:each="item : ${categoryListDTO}"
+                                                            th:value="${item.id}"
+                                                            th:text="${item.title}"
+                                                    ></option>
+                                                </select>
+                                                <p
+                                                        class="text-danger"
+                                                        th:if="${#fields.hasErrors('categoryId')}"
+                                                        th:errors="*{categoryId}"
+                                                ></p>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputSummary">Giới Thiệu <code>(*)</code></label>
+                                                <textarea style="height: 125px" type="text" name="summary"
+                                                          class="form-control"
+                                                          th:classappend="${#fields.hasErrors('summary')} ? 'is-invalid' : ''"
+                                                          id="inputSummary" placeholder="Nhập mô tả"
+                                                          th:field="*{summary}"></textarea>
+                                                <p class="text-danger" th:if="${#fields.hasErrors('summary')}"
+                                                   th:errors="*{summary}"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="inputOwner">Người Đăng</label>
+                                                <select class="form-control select2" id="inputOwner"
+                                                        style="width: 100%;"
+                                                        th:field="*{ownerId}" disabled>
+                                                    <option th:each="item : ${accountList}"
+                                                            th:value="${item.id}"
+                                                            th:text="${item.fullName}"></option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="inputStatus">Trạng Thái</label>
+                                                <select
+                                                        id="inputStatus"
+                                                        class="form-control select2"
+                                                        style="width: 100%"
+                                                        th:field="*{status}"
+                                                >
+                                                    <option value="true">Kích Hoạt</option>
+                                                    <option value="false">Tạm Ngưng</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Ảnh Đại Diện</label>
+                                                <div class="input-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" name="avatarMul" accept="image/*">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6" th:if="${courseDTO.avatar != null }">
+                                                    <img th:src="@{${courseDTO.avatar}}" width="350px"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="inputDescription">Mô Tả <code>(*)</code></label>
+                                                <textarea
+                                                        name="description"
+                                                        style="height: 250px"
+                                                        id="inputDescription"
+                                                        th:field="*{description}"
+                                                        th:classappend="${#fields.hasErrors('description')} ? 'is-invalid' : ''"
+                                                        placeholder="..."
+                                                >
+                                                        </textarea>
+                                                <p
+                                                        class="text-danger"
+                                                        th:if="${#fields.hasErrors('description')}"
+                                                        th:errors="*{description}"
+                                                ></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <input type="hidden" name="id" class="form-control" th:field="*{id}"/>
+                                    <input
+                                            type="hidden"
+                                            name="ownerId"
+                                            class="form-control"
+                                            th:field="*{ownerId}"
+                                    />
+                                    <button type="submit" class="btn btn-primary">Lưu Dữ Liệu</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" th:if="${courseDTO.id != 0}">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h3 class="card-title">Danh Sách Chương</h3>
+                                    <div class="card-tools">
+                                        <a
+                                                type="button"
+                                                class="btn btn-block btn-primary"
+                                                th:href="@{'/back/chapters/form?courseId=' + ${courseDTO.id}}"
+                                        >
+                                            Thêm Mới
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Tên Chương</th>
+                                        <th style="width: 150px">Số Lượng Bài Học</th>
+                                        <th style="width: 100px">Trạng Thái</th>
+                                        <th style="width: 200px">Tùy Chọn</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="item : ${chapterListDTO}">
+                                        <td th:text="${item.title}"></td>
+                                        <td th:text="${item.totalLesson}"></td>
+                                        <td th:switch="${item.status}" class="text-center">
+                                            <p class="badge badge-success" th:case="true">Hoạt Động</p>
+                                            <p class="badge badge-danger" th:case="false">Tạm Ngưng</p>
+                                        </td>
+                                        <td>
+                                            <a
+                                                    class="btn btn-primary btn-sm"
+                                                    th:href="@{'/back/chapters/form/' + ${item.id} + '?courseId=' + ${courseDTO.id}}"
+                                            >
+                                                <i class="fas fa-eye"></i>
+                                                Xem
+                                            </a>
+
+                                            <a class="btn btn-primary btn-sm"
+                                               th:href="@{'/back/exam/upload/form?chapterId=' + ${item.id}}">
+                                                Kiểm Tra
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Tên Chương</th>
+                                        <th>Số Lượng Bài Học</th>
+                                        <th>Trạng Thái</th>
+                                        <th>Tùy Chọn</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" th:if="${courseDTO.id != 0}">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h3 class="card-title">Danh Sách Bài Kiểm Tra Khóa Học</h3>
+                                    <div class="card-tools d-flex justify-content-between align-items-center"
+                                         style="width: 37%">
+                                        <h3 class="card-title">Thêm Mới Kiểm Tra</h3>
+                                        <div class="d-flex">
+                                            <div class="mr-3">
+                                                <a
+                                                        type="button"
+                                                        class="btn btn-block btn-primary mr-3"
+                                                        th:href="@{'/back/exam/upload/form/essay?courseId=' + ${courseDTO.id}}"
+                                                >
+                                                    Tự Luận
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <a
+                                                        type="button"
+                                                        class="btn btn-block btn-primary"
+                                                        th:href="@{'/back/exam/upload/form?courseId=' + ${courseDTO.id}}"
+                                                >
+                                                    Trắc Nghiệm
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table id="example12" class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Tiêu Đề</th>
+                                        <th style="width: 200px">Loại Kiểm Tra</th>
+                                        <th style="width: 200px">Thời Gian</th>
+                                        <th style="width: 150px">Tùy Chọn</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="item : ${examListDTO}">
+                                        <td th:text="${item.title}"></td>
+                                        <td th:text="${item.type}"></td>
+                                        <td th:text="${item.totalTime}"></td>
+                                        <td>
+                                            <a class="btn btn-primary btn-sm"
+                                               th:href="@{'/back/exam/form/' + ${item.id}}">
+                                                <i class="fas fa-eye"></i>
+                                                Xem
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Tiêu Đề</th>
+                                        <th style="width: 200px">Kiểu Kiểm Tra</th>
+                                        <th style="width: 200px">Loại Kiểm Tra</th>
+                                        <th style="width: 150px">Tùy Chọn</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" th:if="${courseDTO.id != 0 && #lists.size(resultDTOList) > 0}">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h3 class="card-title">Danh Sách Học Viên Làm Bài Kiểm Tra</h3>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table id="example13" class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Học Viên</th>
+                                        <th style="width: 200px">Bài Kiểm Tra</th>
+                                        <th style="width: 200px">Điểm</th>
+                                        <th style="width: 200px">Trạng Thái</th>
+                                        <th style="width: 150px">Tùy Chọn</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="item : ${resultDTOList}">
+                                        <td th:text="${item.accountDTO.fullName}"></td>
+                                        <td th:text="${item.examDTO.title}"></td>
+                                        <td th:text="${item.score}"></td>
+                                        <td th:switch="${item.result}">
+                                            <span th:case="PASSED" class="badge bg-success">Hoàn Thành</span>
+                                            <span th:case="FAILED" class="badge bg-danger">Chưa Hoàn Thành</span>
+                                            <span th:case="PROGRESS" class="badge bg-warning">Đang Chấm Điểm</span>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary btn-sm"
+                                               th:href="@{'/back/result/form/' + ${item.id}}">
+                                                <i class="fas fa-eye"></i>
+                                                Xem
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Học Viên</th>
+                                        <th style="width: 200px">Bài Kiểm Tra</th>
+                                        <th style="width: 200px">Điểm</th>
+                                        <th style="width: 200px">Trạng Thái</th>
+                                        <th style="width: 150px">Tùy Chọn</th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div th:replace="~{fragments/back/footer :: footer}"></div>
+</div>
+
+<!-- jQuery -->
+<script th:src="@{/resources/back/plugins/jquery/jquery.min.js}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script th:src="@{/resources/back/plugins/jquery-ui/jquery-ui.min.js}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+    $.widget.bridge("uibutton", $.ui.button);
+</script>
+<!-- Bootstrap 4 -->
+<script th:src="@{/resources/back/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- ChartJS -->
+<script th:src="@{/resources/back/plugins/chart.js/Chart.min.js}"></script>
+<!-- Sparkline -->
+<script th:src="@{/resources/back/plugins/sparklines/sparkline.js}"></script>
+<!-- JQVMap -->
+<script th:src="@{/resources/back/plugins/jqvmap/jquery.vmap.min.js}"></script>
+<script th:src="@{/resources/back/plugins/jqvmap/maps/jquery.vmap.usa.js}"></script>
+<!-- jQuery Knob Chart -->
+<script th:src="@{/resources/back/plugins/jquery-knob/jquery.knob.min.js}"></script>
+<!-- daterangepicker -->
+<script th:src="@{/resources/back/plugins/moment/moment.min.js}"></script>
+<script th:src="@{/resources/back/plugins/daterangepicker/daterangepicker.js}"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script
+        th:src="@{/resources/back/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js}"
+></script>
+<!-- Summernote -->
+<script th:src="@{/resources/back/plugins/summernote/summernote-bs4.min.js}"></script>
+<!-- overlayScrollbars -->
+<script th:src="@{/resources/back/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/resources/back/dist/js/adminlte.js}"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script th:src="@{/resources/back/dist/js/pages/dashboard.js}"></script>
+<script th:src="@{/resources/back/plugins/summernote/summernote-bs4.min.js}"></script>
+<script>
+    $(function () {
+        $("#inputDescription").summernote({
+            height: 300,
+            toolbar: [
+                ["style", ["style"]],
+                ["font", ["bold", "italic", "underline", "clear"]],
+                ["fontname", ["fontname"]],
+                ["fontsize", ["fontsize"]],
+                ["color", ["color"]],
+                ["para", ["ol", "ul", "paragraph"]],
+                ["table", ["table"]],
+                ["insert", ["link"]],
+                ["view", ["fullscreen", "codeview", "help"]],
+            ],
+        });
+    });
+</script>
+</body>
+</html>

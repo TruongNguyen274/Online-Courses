@@ -1,0 +1,453 @@
+<!Doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>[[${courseDTO.title}]] | Online Learning</title>
+
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/resources/front/img/logo/favicon.png}">
+
+    <!-- CSS here  -->
+    <link rel="stylesheet" th:href="@{/resources/front/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/meanmenu.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/slick.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/font-awesome-pro.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/elegent-icons.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/spacing.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/main.css}">
+    <!-- css end  here-->
+
+    <style>
+        .course__member-thumb::after {
+            display:none;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- back to top start -->
+<button class="tp-backtotop">
+    <span><i class="fal fa-angle-double-up"></i></span>
+</button>
+<!-- back to top end -->
+
+<div class="body-overlay"></div>
+<!-- offcanvas area end -->
+
+<div th:replace="~{fragments/front/header :: header}"></div>
+
+<main>
+
+    <div class="breadcrumb__area include-bg pt-200 pb-150 breadcrumb__overlay"
+         th:attr="data-background=@{/resources/front/img/breadcrumb/breadcrumb-bg.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="breadcrumb__content p-relative z-index-1">
+                        <h3 class="breadcrumb__title">[[${courseDTO.title}]]</h3>
+                        <div class="breadcrumb__list">
+                            <span><a href="/">Trang Chủ</a></span>
+                            <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                            <span>Khoá Học</span>
+                            <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                            <span>[[${courseDTO.title}]]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="course-details pt-60">
+        <div class="container">
+
+            <div class="course-details__header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="page__title-content mb-25">
+                                <span class="page__title-pre" th:text="${courseDTO.categoryDTO.title}"></span>
+                                <h1 class="page__title" th:text="${courseDTO.title}"></h1>
+                            </div>
+                            <div class="course-details__meta d-sm-flex">
+                                <div class="course__teacher-3 d-flex align-items-center mr-70 mb-30">
+                                    <div class="course__teacher-info-3">
+                                        <h5>Giảng Viên</h5>
+                                        <p><a href="#" th:text="${courseDTO.ownerDTO.fullName}"></a></p>
+                                    </div>
+                                </div>
+                                <div class="course__update mr-80 mb-30">
+                                    <h5>Cập Nhật</h5>
+                                    <p th:text="${courseDTO.lastUpdate}"></p>
+                                </div>
+                                <div class="course__rating-2 mb-30">
+                                    <h5>Đánh Giá</h5>
+                                    <div class="course__rating-inner d-flex align-items-center">
+                                        <p>
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                            4.5
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="course-details__content">
+                                <div class="course__img w-img mb-30">
+                                    <img th:src="@{${courseDTO.avatar}}" alt="">
+                                </div>
+                                <div class="course__tab-2 mb-45">
+                                    <ul class="nav nav-tabs" id="courseTab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="description-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#description" type="button" role="tab"
+                                                    aria-controls="description" aria-selected="true"><i
+                                                    class="icon_ribbon_alt"></i> <span>Mô Tả</span></button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="curriculum-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#curriculum" type="button" role="tab"
+                                                    aria-controls="curriculum" aria-selected="false"><i
+                                                    class="icon_book_alt"></i> <span>Bài Giảng</span></button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="review-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#review" type="button" role="tab"
+                                                    aria-controls="review" aria-selected="false"><i
+                                                    class="icon_star_alt"></i> <span>Đánh Giá</span></button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="member-tab" data-bs-toggle="tab"
+                                                    data-bs-target="#member" type="button" role="tab"
+                                                    aria-controls="member" aria-selected="false"><i
+                                                    class="fal fa-user"></i> <span>Học Viên</span></button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="course__tab-content mb-95">
+                                <div class="tab-content" id="courseTabContent">
+                                    <div class="tab-pane fade active show" id="description" role="tabpanel"
+                                         aria-labelledby="description-tab">
+                                        <div class="course__description">
+                                            <h3>Thông Tin</h3>
+                                            <p th:utext="${courseDTO.description}"></p>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="curriculum" role="tabpanel"
+                                         aria-labelledby="curriculum-tab">
+                                        <div class="course__curriculum">
+                                            <h3>Bài Giảng</h3>
+                                            <div class="accordion" id="course__accordion"
+                                                 th:each="item : ${chapterListDTO}">
+                                                <div class="accordion-item mb-20">
+                                                    <h2 class="accordion-header" th:id="${'week-' + item.id}">
+                                                        <button class="accordion-button" type="button"
+                                                                data-bs-toggle="collapse" aria-expanded="true"
+                                                                th:attr="data-bs-target='#week-' + ${item.id} + '-content', aria-controls='#week-' + ${item.id} + '-content'">
+                                                            <span th:text="${item.title}"></span>
+                                                        </button>
+                                                    </h2>
+                                                    <div th:id="${'week-' + item.id + '-content'}"
+                                                         class="accordion-collapse collapse show"
+                                                         data-bs-parent="#course__accordion"
+                                                         th:attr="aria-labelledby='#week-' + ${item.id}">
+                                                        <div class="accordion-body">
+                                                            <div class="course__curriculum-content d-sm-flex justify-content-between align-items-center"
+                                                                 th:each="lecture : ${item.lectureList}">
+                                                                <div class="course__curriculum-info">
+                                                                    <svg class="document" viewBox="0 0 24 24">
+                                                                        <path class="st0"
+                                                                              d="M14,2H6C4.9,2,4,2.9,4,4v16c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V8L14,2z"></path>
+                                                                        <polyline class="st0"
+                                                                                  points="14,2 14,8 20,8 "></polyline>
+                                                                        <line class="st0" x1="16" y1="13" x2="8"
+                                                                              y2="13"></line>
+                                                                        <line class="st0" x1="16" y1="17" x2="8"
+                                                                              y2="17"></line>
+                                                                        <polyline class="st0"
+                                                                                  points="10,9 9,9 8,9 "></polyline>
+                                                                    </svg>
+                                                                    <h3><span th:text="${lecture.title}"></span></h3>
+                                                                </div>
+                                                                <div class="course__curriculum-meta">
+                                                                    <span class="time" th:text="${lecture.timeLesson}"> <i
+                                                                            class="icon_clock_alt"></i> </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+                                        <div class="course__review">
+                                            <h3>Bình Luận</h3>
+                                            <div class="course__comment mb-75">
+                                                <ul>
+                                                    <li th:each="item : ${commentDTOList}">
+                                                        <div class="course__comment-box ">
+                                                            <div class="course__comment-thumb float-start">
+                                                                <img th:src="@{/resources/front/img/testimonial/avata-lg-2.png}"
+                                                                     alt="">
+                                                            </div>
+                                                            <div class="course__comment-content">
+                                                                <div class="course__comment-wrapper ml-70 fix">
+                                                                    <div class="course__comment-info float-start">
+                                                                        <h4 th:text="${item.ownerDTO.fullName}"></h4>
+                                                                        <span th:text="${item.createdDate}"></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="course__comment-text ml-70">
+                                                                    <p th:text="${item.content}"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <th:block th:if="${isFound == true}">
+                                                <div class="course__form">
+                                                    <h3>Viết Bình Luận</h3>
+                                                    <div class="course__form-inner">
+                                                        <form method="post"
+                                                              th:action="@{/comment/form/course}"
+                                                              th:object="${commentDTO}">
+                                                            <div class="row">
+                                                                <div class="col-xxl-12">
+                                                                    <div class="course__form-input">
+                                                                        <textarea name="content" th:value="${content}"
+                                                                                placeholder="Viết Bình Luận Của Bạn!"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-xxl-12">
+                                                                    <div class="course__form-btn mt-10 mb-55">
+                                                                        <input type="hidden" name="courseId"
+                                                                               th:value="${courseDTO.id}">
+                                                                        <button type="submit" class="tp-btn">
+                                                                                <span> Bình Luận <i class="fa-regular fa-arrow-right"></i> </span>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </th:block>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="member" role="tabpanel" aria-labelledby="member-tab">
+                                        <div class="course__member mb-45">
+                                            <h3>Học Viên</h3>
+                                            <th:block th:each="item : ${orderListDTO}">
+                                                <div class="course__member-item">
+                                                    <div class="row align-items-center">
+                                                        <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-7 col-sm-8">
+                                                            <div class="course__member-thumb d-flex align-items-center">
+                                                                <img th:src="@{/resources/front/img/testimonial/avata-lg-4.png}"
+                                                                     alt="">
+                                                                <div class="course__member-name ml-20">
+                                                                    <h5 th:text="${item.accountDTO.fullName}"></h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </th:block>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-4 col-xl-4 col-lg-4">
+                            <div class="course__sidebar pl-70 p-relative">
+                                <div class="course__sidebar-widget-2 white-bg mb-20">
+                                    <div class="course__video">
+                                        <div class="course__video-thumb w-img mb-25">
+                                            <img th:src="@{/resources/front/img/courses/courses-5.jpg}" alt="">
+                                            <div class="course__video-play">
+                                                <a th:href="${courseDTO.intro}" data-fancybox=""
+                                                   class="play-btn popup-video"> <i class="fas fa-play"></i> </a>
+                                            </div>
+                                        </div>
+                                        <div class="course__video-meta mb-25">
+                                            <th:block th:if="${courseDTO.discount} != '0'">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <div class="course__video-price">
+                                                            <h5 th:text="${courseDTO.newPrice} + ' VNĐ'"></h5>
+                                                            <h5 class="old-price"
+                                                                th:text="${courseDTO.price} + ' VNĐ'"></h5>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="course__video-discount">
+                                                            <span th:text="${courseDTO.discount} +'% OFF'"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </th:block>
+                                            <th:block th:if="${courseDTO.discount} == '0'">
+                                                <div class="course__video-price">
+                                                    <h5 th:text="${courseDTO.price} + ' VNĐ'"></h5>
+                                                </div>
+                                            </th:block>
+                                        </div>
+                                        <div class="course__video-content mb-35">
+                                            <ul>
+                                                <li class="d-flex align-items-center">
+                                                    <div class="course__video-icon">
+                                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                             viewBox="0 0 16 16"
+                                                             style="enable-background:new 0 0 16 16;"
+                                                             xml:space="preserve">
+                                                <path class="st0"
+                                                      d="M2,6l6-4.7L14,6v7.3c0,0.7-0.6,1.3-1.3,1.3H3.3c-0.7,0-1.3-0.6-1.3-1.3V6z"/>
+                                                            <polyline class="st0" points="6,14.7 6,8 10,8 10,14.7 "/>
+                                             </svg>
+                                                    </div>
+                                                    <div class="course__video-info">
+                                                        <h5><span>Giảng Viên:</span> [[${courseDTO.ownerDTO.fullName}]]
+                                                        </h5>
+                                                    </div>
+                                                </li>
+                                                <li class="d-flex align-items-center">
+                                                    <div class="course__video-icon">
+                                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                             viewBox="0 0 24 24"
+                                                             style="enable-background:new 0 0 24 24;"
+                                                             xml:space="preserve">
+                                                <path class="st0" d="M4,19.5C4,18.1,5.1,17,6.5,17H20"/>
+                                                            <path class="st0"
+                                                                  d="M6.5,2H20v20H6.5C5.1,22,4,20.9,4,19.5v-15C4,3.1,5.1,2,6.5,2z"/>
+                                             </svg>
+                                                    </div>
+                                                    <div class="course__video-info">
+                                                        <h5><span>Bài Học:</span> [[${courseDTO.lecture}]]</h5>
+                                                    </div>
+                                                </li>
+                                                <li class="d-flex align-items-center">
+                                                    <div class="course__video-icon">
+                                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                             viewBox="0 0 16 16"
+                                                             style="enable-background:new 0 0 16 16;"
+                                                             xml:space="preserve">
+                                                <circle class="st0" cx="8" cy="8" r="6.7"/>
+                                                            <polyline class="st0" points="8,4 8,8 10.7,9.3 "/>
+                                             </svg>
+                                                    </div>
+                                                    <div class="course__video-info">
+                                                        <h5><span>Thời Gian:</span> [[${courseDTO.duration}]]</h5>
+                                                    </div>
+                                                </li>
+                                                <li class="d-flex align-items-center">
+                                                    <div class="course__video-icon">
+                                                        <svg>
+                                                            <path class="st0"
+                                                                  d="M13.3,14v-1.3c0-1.5-1.2-2.7-2.7-2.7H5.3c-1.5,0-2.7,1.2-2.7,2.7V14"/>
+                                                            <circle class="st0" cx="8" cy="4.7" r="2.7"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="course__video-info">
+                                                        <h5><span>Học Viên:</span> [[${courseDTO.enrolled}]]</h5>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="course__enroll-btn p-relative z-index-1">
+                                            <th:block th:if="${isFound == null || isFound == false}">
+                                                <a th:href="@{'/checkout/course?courseId=' + ${courseDTO.id}}"
+                                                   class="tp-btn w-100">
+                                                    <span>Mua Khoá Học <i class="fa-regular fa-arrow-right"></i> </span>
+                                                    <div class="transition"></div>
+                                                </a>
+                                            </th:block>
+                                            <th:block th:if="${isFound == true}">
+                                                <a th:href="@{'/course/learn?courseId=' + ${courseDTO.id}}"
+                                                   class="tp-btn w-100">
+                                                    <span>Vào Học Ngay <i class="fa-regular fa-arrow-right"></i> </span>
+                                                    <div class="transition"></div>
+                                                </a>
+                                            </th:block>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="course__sidebar-widget-2 white-bg mb-20">
+                                    <div class="course__sidebar-course">
+                                        <h3 class="course__sidebar-title">Khóa Học Tương Tự</h3>
+                                        <ul>
+                                            <li th:each="item : ${courseListRelatedDTO}">
+                                                <div class="course__sm d-flex align-items-center mb-30">
+                                                    <div class="course__sm-thumb mr-20">
+                                                        <a th:href="@{'/course?courseId=' + ${item.id}}">
+                                                            <img th:src="@{/resources/front/img/courses/courses-1.jpg}"
+                                                                 alt="">
+                                                        </a>
+                                                    </div>
+                                                    <div class="course__sm-content">
+                                                        <div class="course__sm-rating">
+                                                            <ul>
+                                                                <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                                                <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                                                <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                                                <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                                                <li><a href="#"> <i class="icon_star"></i> </a></li>
+                                                            </ul>
+                                                        </div>
+                                                        <h5><a th:href="@{'/course?courseId=' + ${item.id}}"
+                                                               th:text="${item.title}"></a></h5>
+                                                        <div class="course__sm-price">
+                                                            <span th:text="${item.newPrice} + ' VNĐ'"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+<div th:replace="~{fragments/front/footer :: footer}"></div>
+
+<!-- JS here -->
+<script th:src="@{/resources/front/js/vendor/jquery.js}"></script>
+<script th:src="@{/resources/front/js/vendor/waypoints.js}"></script>
+<script th:src="@{/resources/front/js/bootstrap-bundle.js}"></script>
+<script th:src="@{/resources/front/js/meanmenu.js}"></script>
+<script th:src="@{/resources/front/js/slick.js}"></script>
+<script th:src="@{/resources/front/js/magnific-popup.js}"></script>
+<script th:src="@{/resources/front/js/parallax.js}"></script>
+<script th:src="@{/resources/front/js/nice-select.js}"></script>
+<script th:src="@{/resources/front/js/counterup.js}"></script>
+<script th:src="@{/resources/front/js/wow.js}"></script>
+<script th:src="@{/resources/front/js/isotope-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/imagesloaded-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/ajax-form.js}"></script>
+<script th:src="@{/resources/front/js/countdown.js}"></script>
+<script th:src="@{/resources/front/js/main.js}"></script>
+</body>
+
+</html>

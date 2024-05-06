@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>404 Error | Online Learning</title>
+
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/resources/front/img/logo/favicon.png}">
+
+    <!-- CSS here  -->
+    <link rel="stylesheet" th:href="@{/resources/front/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/meanmenu.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/slick.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/font-awesome-pro.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/elegent-icons.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/spacing.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/main.css}">
+    <!-- css end  here-->
+</head>
+
+<body>
+
+<!-- back to top start -->
+<button class="tp-backtotop">
+    <span><i class="fal fa-angle-double-up"></i></span>
+</button>
+<!-- back to top end -->
+
+<div class="body-overlay"></div>
+<!-- offcanvas area end -->
+
+<div th:replace="~{fragments/front/header :: header}"></div>
+
+<main>
+
+    <!-- error area start -->
+    <section class="error__area pt-60 pb-90">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-8 offset-xxl-2 col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
+                    <div class="error__item text-center">
+                        <div class="error__thumb mb-45 w-img">
+                            <img th:src="@{/resources/front/img/icons/404.png}" alt="">
+                        </div>
+                        <div class="error__content">
+                            <h1 class="error__title">Không Tìm Thấy Trang!</h1>
+                            <p>Hãy thử tìm kiếm một số trang khác.</p>
+                            <a href="/home" class="tp-btn">
+                                <span>Về Trang Chủ</span>
+                                <div class="transition"></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- error area end -->
+
+</main>
+
+<div th:replace="~{fragments/front/footer :: footer}"></div>
+
+<!-- JS here -->
+<script th:src="@{/resources/front/js/vendor/jquery.js}"></script>
+<script th:src="@{/resources/front/js/vendor/waypoints.js}"></script>
+<script th:src="@{/resources/front/js/bootstrap-bundle.js}"></script>
+<script th:src="@{/resources/front/js/meanmenu.js}"></script>
+<script th:src="@{/resources/front/js/slick.js}"></script>
+<script th:src="@{/resources/front/js/magnific-popup.js}"></script>
+<script th:src="@{/resources/front/js/parallax.js}"></script>
+<script th:src="@{/resources/front/js/nice-select.js}"></script>
+<script th:src="@{/resources/front/js/counterup.js}"></script>
+<script th:src="@{/resources/front/js/wow.js}"></script>
+<script th:src="@{/resources/front/js/isotope-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/imagesloaded-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/ajax-form.js}"></script>
+<script th:src="@{/resources/front/js/countdown.js}"></script>
+<script th:src="@{/resources/front/js/main.js}"></script>
+</body>
+
+</html>

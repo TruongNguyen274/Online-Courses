@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>[[${examDTO.title}]] | Online Learning Application</title>
+
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/resources/front/img/logo/favicon.png}">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/resources/back/dist/css/adminlte.min.css}"/>
+    <!-- CSS here  -->
+    <link rel="stylesheet" th:href="@{/resources/front/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/meanmenu.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/slick.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/font-awesome-pro.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/elegent-icons.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/spacing.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/main.css}">
+    <!-- css end  here-->
+</head>
+
+<body>
+
+<!-- back to top start -->
+<button class="tp-backtotop">
+    <span><i class="fal fa-angle-double-up"></i></span>
+</button>
+<!-- back to top end -->
+
+<div class="body-overlay"></div>
+<!-- offcanvas area end -->
+
+<div th:replace="~{fragments/front/header :: header}"></div>
+
+<main>
+
+    <!-- breadcrumb area start -->
+    <div class="breadcrumb__area include-bg pt-200 pb-150 breadcrumb__overlay"
+         th:attr="data-background=@{/resources/front/img/breadcrumb/breadcrumb-bg-2.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="breadcrumb__content p-relative z-index-1">
+                        <h3 class="breadcrumb__title">[[${examDTO.title}]]</h3>
+                        <div class="breadcrumb__list">
+                            <span><a href="/">Trang Chủ</a></span>
+                            <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                            <span>Kiểm Tra</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb area end -->
+
+    <section class="coupon-area pt-100 pb-30">
+        <div class="container">
+            <form method="post"
+                  th:action="@{/exam/essay/submit}"
+                  enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-6" th:each="item : ${questionDTOList}">
+                        <div class="coupon-accordion">
+                            <div id="checkout-login" class="coupon-content d-block"
+                                 style="border-top: 3px solid var(--tp-theme-primary);">
+                                <div class="coupon-info">
+                                    <p>[[${examDTO.title}]] <a class="ml-3 text-primary" th:href="@{'/exam/essay/download/' + ${item.id}}" >Tải xuống câu hỏi</a></p>
+                                    <input type="hidden" name="id" th:value="${item.id}">
+                                    <div class="form-group">
+                                        <label for="template">Câu Trả Lời <code>(*) Tài liệu kiểm tra phải là file Word.</code></label>
+                                        <div class="input-group mb-3">
+                                            <div class="custom-file">
+                                                <input type="file"
+                                                       class="custom-file-input" id="template"
+                                                       name="templateMul"
+                                                       accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                                                       required/>
+                                                <label class="custom-file-label" for="template">Chọn Tài
+                                                    Liệu</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <input type="hidden" name="courseId" th:value="${courseId}">
+                        <input type="hidden" name="dateStart" th:value="${dateStart}">
+                        <input type="hidden" name="examId" th:value="${examDTO.id}">
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+</main>
+
+<div th:replace="~{fragments/front/footer :: footer}"></div>
+
+<!-- JS here -->
+<script th:src="@{/resources/front/js/vendor/jquery.js}"></script>
+<script th:src="@{/resources/front/js/vendor/waypoints.js}"></script>
+<script th:src="@{/resources/front/js/bootstrap-bundle.js}"></script>
+<script th:src="@{/resources/front/js/meanmenu.js}"></script>
+<script th:src="@{/resources/front/js/slick.js}"></script>
+<script th:src="@{/resources/front/js/magnific-popup.js}"></script>
+<script th:src="@{/resources/front/js/parallax.js}"></script>
+<script th:src="@{/resources/front/js/nice-select.js}"></script>
+<script th:src="@{/resources/front/js/counterup.js}"></script>
+<script th:src="@{/resources/front/js/wow.js}"></script>
+<script th:src="@{/resources/front/js/isotope-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/imagesloaded-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/ajax-form.js}"></script>
+<script th:src="@{/resources/front/js/countdown.js}"></script>
+<script th:src="@{/resources/front/js/main.js}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script th:src="@{/resources/back/plugins/bs-custom-file-input/bs-custom-file-input.js}"></script>
+<script>
+    $.widget.bridge("uibutton", $.ui.button);
+</script>
+
+<script>
+    $(document).ready(function () {
+      bsCustomFileInput.init()
+    })
+</script>
+</body>
+
+</html>

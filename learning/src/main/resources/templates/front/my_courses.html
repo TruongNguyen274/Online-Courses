@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Khoá Học | Online Learning</title>
+
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/resources/front/img/logo/favicon.png}">
+
+    <!-- CSS here  -->
+    <link rel="stylesheet" th:href="@{/resources/front/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/meanmenu.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/slick.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/font-awesome-pro.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/elegent-icons.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/spacing.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/main.css}">
+    <!-- css end  here-->
+</head>
+
+<body>
+
+<!-- back to top start -->
+<button class="tp-backtotop">
+    <span><i class="fal fa-angle-double-up"></i></span>
+</button>
+<!-- back to top end -->
+
+<div class="body-overlay"></div>
+<!-- offcanvas area end -->
+
+<div th:replace="~{fragments/front/header :: header}"></div>
+
+<main>
+    <!-- breadcrumb area start -->
+    <div class="breadcrumb__area include-bg pt-200 pb-150 breadcrumb__overlay"
+         th:attr="data-background=@{/resources/front/img/breadcrumb/breadcrumb-bg-2.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="breadcrumb__content p-relative z-index-1">
+                        <h3 class="breadcrumb__title">Khoá Học</h3>
+                        <div class="breadcrumb__list">
+                            <span><a href="/">Trang Chủ</a></span>
+                            <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                            <span>Tài Khoản</span>
+                            <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                            <span>Khoá Học</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb area end -->
+
+    <!-- course area start -->
+    <section class="course__area pt-120 pb-120">
+        <div class="container">
+            <th:block th:if="${messageDTO != null && messageDTO.key == 'save'}">
+                <div class="course__tab-inner bg-success mb-50">
+                    <div class="row align-items-center">
+                        <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <div class="course__tab-wrapper d-flex align-items-center">
+                                <div class="course__view">
+                                    <h4 class="text-light" th:text="${messageDTO.message}"></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="course__tab-conent pb-40">
+                        <div class="tab-content" id="courseTabContent">
+                            <div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
+                                <div class="row">
+                                    <div class="col-xxl-12" th:each="item : ${orderListDTO}">
+                                        <div class="tp-courses-4__item white-bg mb-30 fix">
+                                            <div class="row gx-0">
+                                                <div class="col-xxl-4 col-xl-4 col-lg-4">
+                                                    <div class="tp-courses-4__thumb w-img fix p-relative">
+                                                        <img th:src="@{${item.courseDTO.avatar}}" style="max-width: 300px"
+                                                             th:alt="${item.courseDTO.title}">
+                                                        <span class="tp-courses__cat cat-color-1">
+                                                            <a th:href="@{'/courses/' + ${item.courseDTO.categoryDTO.slug}}"
+                                                               th:text="${item.courseDTO.categoryDTO.title}"></a>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xxl-8 col-xl-8 col-lg-8">
+                                                    <div class="tp-courses-4__content-wrapper">
+                                                        <div class="tp-courses-4__content">
+                                                            <div class="tp-courses-4__meta">
+                                                                <span class="tp-ratting"><i class="icon_star_alt"></i> 4.5 (100)</span>
+                                                                <span><i class="icon_heart_alt"></i>18,400</span>
+                                                                <span><i class="fa-light fa-user"></i>365</span>
+                                                                <th:block th:if="${item.status == false}">
+                                                                    <span class="bg-warning float-end text-light"
+                                                                          style="border-radius: 7px; padding: 5px 20px;">
+                                                                        Đang Duyệt
+                                                                    </span>
+                                                                </th:block>
+                                                            </div>
+                                                            <h3 class="tp-courses-4__title">
+                                                                <a th:href="@{'/course/learn?courseId=' + ${item.courseDTO.id}}"
+                                                                   th:text="${item.courseDTO.title}"></a>
+                                                            </h3>
+                                                            <div class="tp-courses-4__avata">
+                                                                <span>
+                                                                    <a href="#"
+                                                                       th:text="${item.courseDTO.ownerDTO.fullName}"></a>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xxl-12">
+                    <th:block th:if="${totalPage > 1}">
+                        <div class="basic-pagination mt-50">
+                            <nav>
+                                <ul th:with="pageURLPrefix = '/my-courses/' + '?page='">
+                                    <li th:class="${currentPage > 1 ? '' : 'disabled'}">
+                                        <a th:href="@{${pageURLPrefix}} + ${currentPage - 1}">
+                                            <i class="far fa-angle-left"></i>
+                                        </a>
+                                    </li>
+
+                                    <th:block th:if="${totalPage <= 4}">
+                                        <li th:each="index : ${#numbers.sequence(1, totalPage)}">
+                                            <a th:class="${currentPage == index ? 'current' : ''}"
+                                               th:href="@{${pageURLPrefix}} + ${index}" th:text="${index}"></a>
+                                        </li>
+                                    </th:block>
+
+                                    <th:block th:if="${totalPage > 4}">
+
+                                        <th:block th:if="${currentPage <= 2 || currentPage > totalPage - 2}">
+
+                                            <li th:each="index : ${#numbers.sequence(1, 2)}">
+                                                <a th:class="${currentPage == index ? 'current' : ''}"
+                                                   th:href="@{${pageURLPrefix}} + ${index}" th:text="${index}"></a>
+                                            </li>
+
+                                            <th:block th:if="${currentPage <= 2}">
+                                                <li>
+                                                    <a th:class="${currentPage == index ? 'current' : ''}"
+                                                       th:href="@{${pageURLPrefix}} + '3'">...</a>
+                                                </li>
+                                            </th:block>
+
+                                            <th:block th:if="${currentPage >= totalPage - 1}">
+                                                <li>
+                                                    <a th:class="${currentPage == index ? 'current' : ''}"
+                                                       th:href="@{${pageURLPrefix}} + ${totalPage - 2}">...</a>
+                                                </li>
+                                            </th:block>
+
+                                            <li th:each="index : ${#numbers.sequence(totalPage - 1, totalPage)}">
+                                                <a th:class="${currentPage == index ? 'current' : ''}"
+                                                   th:href="@{${pageURLPrefix}} + ${index}" th:text="${index}"></a>
+                                            </li>
+
+                                        </th:block>
+
+                                        <th:block th:if="${currentPage > 2 && currentPage < totalPage - 1}">
+
+                                            <li>
+                                                <a th:class="${currentPage == index ? 'current' : ''}"
+                                                   th:href="@{${pageURLPrefix}} + ${currentPage - 2}">...</a>
+                                            </li>
+
+                                            <li th:each="index : ${#numbers.sequence(currentPage - 1, currentPage + 1)}">
+                                                <a th:class="${currentPage == index ? 'current' : ''}"
+                                                   th:href="@{${pageURLPrefix}} + ${index}" th:text="${index}"></a>
+                                            </li>
+
+                                            <li>
+                                                <a th:class="${currentPage == index ? 'current' : ''}"
+                                                   th:href="@{${pageURLPrefix}} + ${currentPage + 2}">...</a>
+                                            </li>
+
+                                        </th:block>
+
+                                    </th:block>
+
+                                    <li th:class="${currentPage < totalPage ? '' : 'disabled'}">
+                                        <a th:href="@{${pageURLPrefix}} + ${currentPage + 1}">
+                                            <i class="far fa-angle-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </th:block>
+
+                    <th:block th:if="${totalPage == 1}">
+                        <div class="basic-pagination mt-50">
+                            <nav>
+                                <ul th:with="pageURLPrefix = '/courses?page='">
+                                    <li class="disabled">
+                                        <a href="#">
+                                            <i class="far fa-angle-left"></i>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="current" th:text="'1'"></a>
+                                    </li>
+
+                                    <li class="disabled">
+                                        <a href="#">
+                                            <i class="far fa-angle-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- course area end -->
+
+</main>
+
+<div th:replace="~{fragments/front/footer :: footer}"></div>
+
+<!-- JS here -->
+<script th:src="@{/resources/front/js/vendor/jquery.js}"></script>
+<script th:src="@{/resources/front/js/vendor/waypoints.js}"></script>
+<script th:src="@{/resources/front/js/bootstrap-bundle.js}"></script>
+<script th:src="@{/resources/front/js/meanmenu.js}"></script>
+<script th:src="@{/resources/front/js/slick.js}"></script>
+<script th:src="@{/resources/front/js/magnific-popup.js}"></script>
+<script th:src="@{/resources/front/js/parallax.js}"></script>
+<script th:src="@{/resources/front/js/nice-select.js}"></script>
+<script th:src="@{/resources/front/js/counterup.js}"></script>
+<script th:src="@{/resources/front/js/wow.js}"></script>
+<script th:src="@{/resources/front/js/isotope-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/imagesloaded-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/ajax-form.js}"></script>
+<script th:src="@{/resources/front/js/countdown.js}"></script>
+<script th:src="@{/resources/front/js/main.js}"></script>
+</body>
+
+</html>

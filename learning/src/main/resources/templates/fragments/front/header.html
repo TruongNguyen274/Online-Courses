@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<body>
+
+<!-- header area start -->
+<header th:fragment="headers">
+    <div class="tp-header__area">
+        <div class="tp-header__top theme-bg-2 d-none d-lg-block">
+            <div class="container-fluid">
+                <div class="tp-header__container">
+                    <div class="row align-items-center">
+                        <div class="col-xxl-6 col-xl-8 col-lg-8 col-md-8">
+                            <div class="tp-header__info">
+                                <ul>
+                                    <li>
+                                        <a href="tel:+443003030266"><i class="fa-regular fa-phone"></i>
+                                            +44300 303 0266</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://goo.gl/maps/qzqY2PAcQwUz1BYN9" target="_blank"><i
+                                                class="fa-regular fa-location-dot"></i> Crown St, Brookoln, Ny 11225,
+                                            USA</a>
+                                    </li>
+                                    <li>
+                                        <i class="fa-regular fa-clock"></i> Mon
+                                        - Sat 8.00 - 18.00
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-4 col-lg-4 col-md-4">
+                            <div class="tp-header__top-right d-flex justify-content-end align-items-center">
+                                <div class="tp-header__account">
+                                    <th:block th:if="${userLogin == null}">
+                                        <ul>
+                                            <li><a href="/login"><i class="fal fa-user"></i>Đăng Nhập</a></li>
+                                            <li>|</li>
+                                            <li><a href="/register"><i class="fal fa-user"></i>Đăng Ký</a></li>
+                                        </ul>
+                                    </th:block>
+                                    <th:block th:if="${userLogin != null}">
+                                        <ul>
+                                            <li><a href="/my-courses"><i class="fal fa-user"></i>Tài Khoản</a></li>
+                                            <li>|</li>
+                                            <li><a href="/logout"><i class="fal fa-user"></i>Đăng Xuất</a></li>
+                                        </ul>
+                                    </th:block>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tp-header__main" id="header-sticky">
+            <div class="container-fluid">
+                <div class="tp-header__container">
+                    <div class="row align-items-center">
+                        <div class="col-xxl-5 col-xl-5 col-lg-3 col-md-6 col-6">
+                            <div class="tp-header-left d-flex justify-content-between align-items-center">
+                                <div class="logo">
+                                    <a href="/home">
+                                        <img th:src="@{/resources/front/img/logo/logo.png}" alt="logo">
+                                    </a>
+                                </div>
+                                <div class="tp-header-attach d-none d-xl-block">
+                                    <div class="tp-header__attach d-flex align-items-center">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-5 col-xl-5 col-lg-6 d-none d-lg-block">
+                            <div class="main-menu text-end">
+                                <nav id="mobile-menu">
+                                    <ul>
+                                        <li>
+                                            <a href="/">Trang Chủ</a>
+                                        </li>
+                                        <li>
+                                            <a href="/about">Giới Thiệu</a>
+                                        </li>
+                                        <li>
+                                            <a href="/courses">Khoá Học</a>
+                                        </li>
+                                        <li>
+                                            <a href="/contact">Liên Hệ</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-xxl-2 col-xl-2 col-lg-3 col-md-6 col-6">
+                            <div class="tp-header__main-right d-flex justify-content-end align-items-center">
+                                <div class="header-acttion-btns d-flex align-items-center d-none d-md-flex">
+                                    <th:block th:if="${userLogin == null}">
+                                        <a href="/register" class="tp-btn">
+                                            <span>Đăng Ký Miễn Phí <i class="fa-regular fa-arrow-right"></i> </span>
+                                            <div class="transition"></div>
+                                        </a>
+                                    </th:block>
+                                    <th:block th:if="${userLogin != null}">
+                                        <a href="/my-courses" class="tp-btn">
+                                            <span th:text="'Xin chào, ' + ${userLogin.fullName}"><i class="fa-regular fa-arrow-right"></i> </span>
+                                            <div class="transition"></div>
+                                        </a>
+                                    </th:block>
+                                </div>
+                                <div class="tp-header__hamburger ml-50 d-lg-none">
+                                    <button class="hamburger-btn offcanvas-open-btn">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- header area end -->
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>[[${examDTO.title}]] | Online Learning Application</title>
+
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/resources/front/img/logo/favicon.png}">
+
+    <!-- CSS here  -->
+    <link rel="stylesheet" th:href="@{/resources/front/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/meanmenu.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/slick.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/font-awesome-pro.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/elegent-icons.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/spacing.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/main.css}">
+    <!-- css end  here-->
+
+    <style>
+        .failed .form-check-input:checked + .form-check-label {
+            padding : 0 5px;
+            color: #fff;
+            background-color: #f00000;
+        }
+        .failed .form-check-input:checked {
+            background-color: #f00000;
+            border-color: #f00000;
+        }
+
+        .success .form-check-input:checked + .form-check-label {
+            padding : 0 5px;
+            color: #fff;
+            background-color: #28A745;
+        }
+        .success .form-check-input:checked {
+            background-color: #28A745;
+            border-color: #28a745;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- back to top start -->
+<button class="tp-backtotop">
+    <span><i class="fal fa-angle-double-up"></i></span>
+</button>
+<!-- back to top end -->
+
+<div class="body-overlay"></div>
+<!-- offcanvas area end -->
+
+<div th:replace="~{fragments/front/header :: header}"></div>
+
+<main>
+
+    <!-- breadcrumb area start -->
+    <div class="breadcrumb__area include-bg pt-200 pb-150 breadcrumb__overlay"
+         th:attr="data-background=@{/resources/front/img/breadcrumb/breadcrumb-bg-2.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="breadcrumb__content p-relative z-index-1">
+                        <h3 class="breadcrumb__title">[[${examDTO.title}]]</h3>
+                        <div class="breadcrumb__list">
+                            <span><a href="/">Trang Chủ</a></span>
+                            <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                            <span>Kiểm Tra</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb area end -->
+
+    <!-- course area start -->
+    <section class="course__area pt-30" th:if="${examDTO.type == 'Trắc Nghiệm'}">
+        <div class="container">
+            <div class="course__tab-inner mb-50 bg-success" th:if="${resultDTO.result == 'PASSED'}">
+                <div class="row align-items-center">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <div class="course__tab-wrapper d-flex align-items-center">
+                            <div class="course__view">
+                                <h4 class="text-light">Chúc mừng bạn đã hoàn thành bài kiểm tra!</h4>
+                                <p class="text-light">Số điểm của bạn là <strong>[[${resultDTO.score}]]</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="course__tab-inner mb-50 bg-danger" th:if="${resultDTO.result == 'FAILED'}">
+                <div class="row align-items-center">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <div class="course__tab-wrapper d-flex align-items-center">
+                            <div class="course__view">
+                                <h4 class="text-light">Bài kiểm tra không hoàn thành!</h4>
+                                <p class="text-light">Số điểm của bạn là <strong>[[${resultDTO.score}]]</strong>. Vui
+                                    lòng kiểm tra lại!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <a style="color:#fff" class="btn btn-primary mb-3" th:href="@{'/course/learn?courseId=' + ${courseId}}">Quay lại khóa học</a>
+                </div>
+                <div class="col-md-3" th:if="${resultDTO.result == 'FAILED'}">
+                    <a style="color:#fff" class="btn btn-warning mb-3" th:href="@{'/exam/' + ${examDTO.id} + '?courseId=' + ${courseId}}">Kiểm tra lại</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- course area end -->
+
+    <section class="coupon-area pt-100 pb-30" th:if="${examDTO.type == 'Trắc Nghiệm' && resultDTO.result == 'PASSED'}">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6" th:each="item, itemStart : ${questionDTOList}">
+                    <div class="coupon-accordion">
+                        <div id="checkout-login" class="coupon-content d-block"
+                             style="border-top: 3px solid var(--tp-theme-primary);">
+                            <div class="coupon-info">
+                                <p class="coupon-text" th:text="${itemStart.index + 1} + '. ' + ${item.title}"></p>
+
+                                <div class="form-check"
+                                     th:classappend="${item.answer == item.chooseAnswer && item.chooseAnswer == item.option1 ? 'success' : 'failed'}"
+                                >
+                                    <input class="form-check-input" type="radio"
+                                           th:name="'question-' + ${item.id}"
+                                           id="flexRadioDefault1"
+                                           th:checked="${item.chooseAnswer == item.option1}"
+                                           disabled>
+                                    <label class="form-check-label"
+                                           for="flexRadioDefault1">A. [[${item.option1}]]</label>
+                                </div>
+
+                                <div class="form-check"
+                                     th:classappend="${item.answer == item.chooseAnswer && item.chooseAnswer == item.option2 ? 'success' : 'failed'}"
+                                >
+                                    <input class="form-check-input" type="radio"
+                                           th:name="'question-' + ${item.id}"
+                                           id="flexRadioDefault2"
+                                           th:checked="${item.chooseAnswer == item.option2}" disabled>
+                                    <label class="form-check-label"
+                                           for="flexRadioDefault2">B. [[${item.option2}]]</label>
+                                </div>
+
+                                <div class="form-check"
+                                     th:classappend="${item.answer == item.chooseAnswer && item.chooseAnswer == item.option3 ? 'success' : 'failed'}"
+                                >
+                                    <input class="form-check-input" type="radio"
+                                           th:name="'question-' + ${item.id}"
+                                           id="flexRadioDefault3"
+                                           th:checked="${item.chooseAnswer == item.option3}"
+                                           disabled>
+                                    <label class="form-check-label"
+                                           for="flexRadioDefault3">C. [[${item.option3}]]</label>
+                                </div>
+
+                                <div class="form-check"
+                                     th:classappend="${item.answer == item.chooseAnswer && item.chooseAnswer == item.option4 ? 'success' : 'failed'}"
+                                >
+                                    <input class="form-check-input" type="radio"
+                                           th:name="'question-' + ${item.id}"
+                                           id="flexRadioDefault4"
+                                           th:checked="${item.chooseAnswer == item.option4}"
+                                           disabled>
+                                    <label class="form-check-label"
+                                           for="flexRadioDefault4">D. [[${item.option4}]]</label>
+                                </div>
+                                <p class="coupon-text text-success fw-bold mt-3 mb-0"
+                                   th:if="${item.answer != item.chooseAnswer}"
+                                   th:text="'Đáp Án Đúng: ' + ${item.answer}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- course area start -->
+    <section class="course__area pt-30" th:if="${examDTO.type == 'Tự Luận'}">
+        <div class="container">
+            <div class="course__tab-inner mb-50 bg-success" th:if="${resultDTO.result == 'PASSED'}">
+                <div class="row align-items-center">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <div class="course__tab-wrapper d-flex align-items-center">
+                            <div class="course__view">
+                                <h4 class="text-light">Chúc mừng bạn đã hoàn thành bài kiểm tra!</h4>
+                                <p class="text-light">Số điểm của bạn là <strong>[[${resultDTO.score}]]</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="course__tab-inner mb-50 bg-danger" th:if="${resultDTO.result == 'FAILED'}">
+                <div class="row align-items-center">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <div class="course__tab-wrapper d-flex align-items-center">
+                            <div class="course__view">
+                                <h4 class="text-light">Bài kiểm tra không hoàn thành!</h4>
+                                <p class="text-light">Số điểm của bạn là <strong>[[${resultDTO.score}]]</strong>. Vui
+                                    lòng kiểm tra lại!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="course__tab-inner mb-50 bg-warning" th:if="${resultDTO.result == 'PROGRESS'}">
+                <div class="row align-items-center">
+                    <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <div class="course__tab-wrapper d-flex align-items-center">
+                            <div class="course__view">
+                                <h4 class="text-light">Bài kiểm tra của bạn đang được tính điểm! Vui lòng quay lại sau.</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <a style="color:#fff" class="btn btn-primary mb-3" th:href="@{'/course/learn?courseId=' + ${courseId}}">Quay lại khóa học</a>
+                </div>
+                <div class="col-md-3" th:if="${resultDTO.result == 'FAILED'}">
+                    <a style="color:#fff" class="btn btn-warning mb-3" th:href="@{'/exam/' + ${examDTO.id} '?courseId=' + ${courseId}}">Kiểm tra lại</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- course area end -->
+
+</main>
+
+<div th:replace="~{fragments/front/footer :: footer}"></div>
+
+<!-- JS here -->
+<script th:src="@{/resources/front/js/vendor/jquery.js}"></script>
+<script th:src="@{/resources/front/js/vendor/waypoints.js}"></script>
+<script th:src="@{/resources/front/js/bootstrap-bundle.js}"></script>
+<script th:src="@{/resources/front/js/meanmenu.js}"></script>
+<script th:src="@{/resources/front/js/slick.js}"></script>
+<script th:src="@{/resources/front/js/magnific-popup.js}"></script>
+<script th:src="@{/resources/front/js/parallax.js}"></script>
+<script th:src="@{/resources/front/js/nice-select.js}"></script>
+<script th:src="@{/resources/front/js/counterup.js}"></script>
+<script th:src="@{/resources/front/js/wow.js}"></script>
+<script th:src="@{/resources/front/js/isotope-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/imagesloaded-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/ajax-form.js}"></script>
+<script th:src="@{/resources/front/js/countdown.js}"></script>
+<script th:src="@{/resources/front/js/main.js}"></script>
+</body>
+
+</html>

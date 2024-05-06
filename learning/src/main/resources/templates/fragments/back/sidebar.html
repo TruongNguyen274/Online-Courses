@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div th:fragment="sidebar">
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="/bac/dashboard" class="brand-link">
+            <img th:src="@{/resources/back/dist/img/AdminLTELogo.png}" alt="AdminLTE Logo"
+                 class="brand-image img-circle elevation-3"
+                 style="opacity: .8"/>
+            <span class="brand-text font-weight-light">Online Learning</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="info">
+                    <a href="/account/profile"><span th:text="'Xin chào, ' + ${userLogin.fullName}"></span></a>
+                    <a href="/logout" class="d-block">Đăng xuất</a>
+                </div>
+            </div>
+
+            <!-- Sidebar Menu -->
+            <nav class="mt-2" th:if="${userLogin.role == 'ADMIN'}">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <li class="nav-item menu-open">
+                        <a href="/back/dashboard" class="nav-link"
+                           th:classappend="${requestURI.contains('/back/dashboard') ? 'active' : ''}">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Tổng Quan
+                            </p>
+                        </a>
+
+                    </li>
+
+                    <li class="nav-header">QUẢN LÝ</li>
+                    <li class="nav-item">
+                        <a href="/back/account" class="nav-link"
+                           th:classappend="${requestURI.contains('/back/account') ? 'active' : ''}">
+                            <i class="nav-icon fa fa-users"></i>
+                            <p>
+                                Tài Khoản
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/back/category" class="nav-link"
+                           th:classappend="${requestURI.contains('/back/category') ? 'active' : ''}">
+                            <i class="nav-icon fas fa-tags"></i>
+                            <p>
+                                Danh Mục
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/back/courses" class="nav-link"
+                           th:classappend="${requestURI.contains('/back/courses') ? 'active' : ''}">
+                            <i class="nav-icon fas fa-book"></i>
+                            <p>
+                                Khóa Học
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/back/order" class="nav-link"
+                           th:classappend="${requestURI.contains('/back/order') ? 'active' : ''}">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Đơn Hàng
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/back/comment" class="nav-link"
+                           th:classappend="${requestURI.contains('/back/comment') ? 'active' : ''}">
+                            <i class="nav-icon fas fa-comments"></i>
+                            <p>
+                                Hỏi Đáp
+                            </p>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+
+            <nav class="mt-2" th:if="${userLogin.role == 'TEACHER'}">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <li class="nav-header">QUẢN LÝ</li>
+                    <li class="nav-item">
+                        <a href="/back/courses" class="nav-link"
+                           th:classappend="${requestURI.contains('/back/courses') ? 'active' : ''}">
+                            <i class="nav-icon fas fa-book"></i>
+                            <p>
+                                Khóa Học
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/back/order" class="nav-link"
+                           th:classappend="${requestURI.contains('/back/order') ? 'active' : ''}">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Đơn Hàng
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/back/comment" class="nav-link"
+                           th:classappend="${requestURI.contains('/back/comment') ? 'active' : ''}">
+                            <i class="nav-icon fas fa-comments"></i>
+                            <p>
+                                Hỏi Đáp
+                            </p>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+</div>
+</body>
+</html>

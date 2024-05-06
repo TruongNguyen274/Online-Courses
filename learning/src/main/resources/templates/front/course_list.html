@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Khóa Học | Online Learning Application</title>
+
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/resources/front/img/logo/favicon.png}">
+
+    <!-- CSS here  -->
+    <link rel="stylesheet" th:href="@{/resources/front/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/meanmenu.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/slick.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/font-awesome-pro.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/elegent-icons.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/spacing.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/main.css}">
+    <!-- css end  here-->
+
+    <style>
+        .tp-courses__meta {
+            padding-left: 10px;
+            padding-right: 0;
+        }
+        .tp-courses__price {
+            padding: 10px;
+        }
+        .tp-courses__value, .more-btn {
+            font-size: 15px;
+        }
+        .disabled {
+            pointer-events: none;
+            opacity: .65;
+        }
+        .sidebar__widget-content {
+            margin-bottom: 25px !important;
+        }
+        .basic-pagination ul li a {
+            width: 40px;
+            height: 40px;
+            line-height: 38px;
+        }
+        .w-img img {
+            height: 239px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- back to top start -->
+<button class="tp-backtotop">
+    <span><i class="fal fa-angle-double-up"></i></span>
+</button>
+<!-- back to top end -->
+
+<div class="body-overlay"></div>
+<!-- offcanvas area end -->
+
+<div th:replace="~{fragments/front/header :: header}"></div>
+
+<main>
+
+    <!-- breadcrumb area start -->
+    <div class="breadcrumb__area include-bg pt-200 pb-150 breadcrumb__overlay"
+         th:attr="data-background=@{/resources/front/img/breadcrumb/breadcrumb-bg-2.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="breadcrumb__content p-relative z-index-1">
+                        <h3 class="breadcrumb__title">Khóa Học</h3>
+                        <div class="breadcrumb__list">
+                            <span><a href="/">Trang Chủ</a></span>
+                            <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                            <span>Khóa Học</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb area end -->
+
+    <!-- course area start -->
+    <section class="course__area pt-100 pb-120">
+        <div class="container">
+            <div class="course__tab-inner grey-bg-2 mb-50">
+                <div class="row align-items-center">
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                        <div class="course__tab-wrapper d-flex align-items-center">
+                            <div class="course__tab-btn">
+                                <ul class="nav nav-tabs" id="courseTab" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="grid-tab" data-bs-toggle="tab"
+                                                data-bs-target="#grid" type="button" role="tab" aria-controls="grid"
+                                                aria-selected="true">
+                                            <svg class="grid" viewBox="0 0 24 24">
+                                                <rect x="3" y="3" class="st0" width="7" height="7"/>
+                                                <rect x="14" y="3" class="st0" width="7" height="7"/>
+                                                <rect x="14" y="14" class="st0" width="7" height="7"/>
+                                                <rect x="3" y="14" class="st0" width="7" height="7"/>
+                                            </svg>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="course__view">
+                                <h4>Danh Sách Khoá Học</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-12">
+                    <div class="sidebar__wrapper">
+                        <div class="sidebar__widget mb-40">
+                            <div class="sidebar__widget-content">
+                                <div class="sidebar__search">
+                                    <form th:action="@{/courses/search}">
+                                        <div class="sidebar__search-input-2 d-flex justify-content-center align-items-center">
+                                            <input type="text" name="search" id="search" placeholder="Tìm Kiếm...">
+                                            <button type="submit"><i class="far fa-search"></i></button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar__widget mb-40">
+                            <h3 class="sidebar__widget-title">Danh Mục</h3>
+                            <div class="sidebar__widget-content">
+                                <ul>
+                                    <li th:each="item : ${categoryListDTO}">
+                                        <a th:href="@{'/courses/' + ${item.id}}"
+                                           th:text="${item.title}"></a>
+                                        <span th:text="${item.amountCourse}"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-9">
+                    <div class="course__tab-conent pb-40">
+                        <div class="tab-content" id="courseTabContent">
+                            <div class="tab-pane fade show active" id="grid" role="tabpanel" aria-labelledby="grid-tab">
+                                <!-- course start  -->
+                                <div class="tp-courses-2__section">
+                                    <div class="tp-courses-2__tab-content">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="coupon-accordion" th:if="${courseListDTO == null || courseListDTO.isEmpty()}">
+                                                    <h3>Không tìm thấy khoá học phù hợp!</h3>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-4 col-md-6" th:each="item : ${courseListDTO}">
+                                                <div class="tp-courses__item mb-30">
+                                                    <div class="tp-courses__thumb w-img fix p-relative">
+                                                        <a th:href="@{'/course' + '?courseId=' + ${item.id}}">
+                                                            <img th:src="@{${item.avatar}}" th:alt="${item.title}">
+                                                        </a>
+                                                        <span class="tp-courses__cat cat-color-1">
+                                                            <a th:href="@{'/courses' + '?courseId=' + ${item.id}}"
+                                                               th:text="${item.categoryDTO.title}"></a>
+                                                        </span>
+                                                    </div>
+                                                    <div class="tp-courses__content white-bg">
+                                                        <div class="tp-courses__meta">
+                                                            <span class="tp-ratting">
+                                                                <i class="icon_star_alt"></i> Đánh Giá
+                                                            </span>
+                                                            <span>
+                                                                <i class="fa-light fa-user"></i>Học Viên
+                                                            </span>
+                                                        </div>
+                                                        <h3 class="tp-courses__title">
+                                                            <a th:href="@{'/course' + '?courseId=' + ${item.id}}"
+                                                               th:text="${item.title}"></a>
+                                                        </h3>
+                                                        <div class="tp-courses__avata">
+                                                            <span>
+                                                                <a href="#" th:text="${item.ownerDTO.fullName}"></a>
+                                                            </span>
+                                                        </div>
+                                                        <div class="tp-courses__price d-flex justify-content-between">
+                                                            <div class="tp-courses__time">
+                                                                <span>
+                                                                    <a th:href="@{'/course' + '?courseId=' + ${item.id}}" class="more-btn">
+                                                                        Xem Thêm
+                                                                        <i class="fa-regular fa-arrow-right"></i>
+                                                                    </a>
+                                                                </span>
+                                                            </div>
+                                                            <div class="tp-courses__value">
+                                                                <span th:text="${item.newPrice} + ' VNĐ'"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- course end  -->
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xxl-12">
+                                    <th:block th:if="${totalPage > 1}">
+                                        <div class="basic-pagination mt-50">
+                                            <nav>
+                                                <ul th:with="pageURLPrefix = '/courses' + '?page='">
+                                                    <li th:class="${currentPage > 1 ? '' : 'disabled'}">
+                                                        <a th:href="@{${pageURLPrefix}} + ${currentPage - 1}">
+                                                            <i class="far fa-angle-left"></i>
+                                                        </a>
+                                                    </li>
+
+                                                    <th:block th:if="${totalPage <= 4}">
+                                                        <li th:each="index : ${#numbers.sequence(1, totalPage)}">
+                                                            <a th:class="${currentPage == index ? 'current' : ''}"
+                                                               th:href="@{${pageURLPrefix}} + ${index}" th:text="${index}"></a>
+                                                        </li>
+                                                    </th:block>
+
+                                                    <th:block th:if="${totalPage > 4}">
+
+                                                        <th:block th:if="${currentPage <= 2 || currentPage > totalPage - 2}">
+
+                                                            <li th:each="index : ${#numbers.sequence(1, 2)}">
+                                                                <a th:class="${currentPage == index ? 'current' : ''}"
+                                                                   th:href="@{${pageURLPrefix}} + ${index}" th:text="${index}"></a>
+                                                            </li>
+
+                                                            <th:block th:if="${currentPage <= 2}">
+                                                                <li>
+                                                                    <a th:class="${currentPage == index ? 'current' : ''}"
+                                                                       th:href="@{${pageURLPrefix}} + '3'">...</a>
+                                                                </li>
+                                                            </th:block>
+
+                                                            <th:block th:if="${currentPage >= totalPage - 1}">
+                                                                <li>
+                                                                    <a th:class="${currentPage == index ? 'current' : ''}"
+                                                                       th:href="@{${pageURLPrefix}} + ${totalPage - 2}">...</a>
+                                                                </li>
+                                                            </th:block>
+
+                                                            <li th:each="index : ${#numbers.sequence(totalPage - 1, totalPage)}">
+                                                                <a th:class="${currentPage == index ? 'current' : ''}"
+                                                                   th:href="@{${pageURLPrefix}} + ${index}" th:text="${index}"></a>
+                                                            </li>
+
+                                                        </th:block>
+
+                                                        <th:block th:if="${currentPage > 2 && currentPage < totalPage - 1}">
+
+                                                            <li>
+                                                                <a th:class="${currentPage == index ? 'current' : ''}"
+                                                                   th:href="@{${pageURLPrefix}} + ${currentPage - 2}">...</a>
+                                                            </li>
+
+                                                            <li th:each="index : ${#numbers.sequence(currentPage - 1, currentPage + 1)}">
+                                                                <a th:class="${currentPage == index ? 'current' : ''}"
+                                                                   th:href="@{${pageURLPrefix}} + ${index}" th:text="${index}"></a>
+                                                            </li>
+
+                                                            <li>
+                                                                <a th:class="${currentPage == index ? 'current' : ''}"
+                                                                   th:href="@{${pageURLPrefix}} + ${currentPage + 2}">...</a>
+                                                            </li>
+
+                                                        </th:block>
+
+                                                    </th:block>
+
+                                                    <li th:class="${currentPage < totalPage ? '' : 'disabled'}">
+                                                        <a th:href="@{${pageURLPrefix}} + ${currentPage + 1}">
+                                                            <i class="far fa-angle-right"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </th:block>
+
+                                    <th:block th:if="${totalPage == 1}">
+                                        <div class="basic-pagination mt-50" >
+                                            <nav>
+                                                <ul th:with="pageURLPrefix = '/courses?page='">
+                                                    <li class="disabled">
+                                                        <a href="#">
+                                                            <i class="far fa-angle-left"></i>
+                                                        </a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a class="current" th:text="'1'"></a>
+                                                    </li>
+
+                                                    <li class="disabled">
+                                                        <a href="#">
+                                                            <i class="far fa-angle-right"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </th:block>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- course area end -->
+
+</main>
+
+<div th:replace="~{fragments/front/footer :: footer}"></div>
+
+<!-- JS here -->
+<script th:src="@{/resources/front/js/vendor/jquery.js}"></script>
+<script th:src="@{/resources/front/js/vendor/waypoints.js}"></script>
+<script th:src="@{/resources/front/js/bootstrap-bundle.js}"></script>
+<script th:src="@{/resources/front/js/meanmenu.js}"></script>
+<script th:src="@{/resources/front/js/slick.js}"></script>
+<script th:src="@{/resources/front/js/magnific-popup.js}"></script>
+<script th:src="@{/resources/front/js/parallax.js}"></script>
+<script th:src="@{/resources/front/js/nice-select.js}"></script>
+<script th:src="@{/resources/front/js/counterup.js}"></script>
+<script th:src="@{/resources/front/js/wow.js}"></script>
+<script th:src="@{/resources/front/js/isotope-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/imagesloaded-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/ajax-form.js}"></script>
+<script th:src="@{/resources/front/js/countdown.js}"></script>
+<script th:src="@{/resources/front/js/main.js}"></script>
+</body>
+
+</html>

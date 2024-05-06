@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Thanh Toán | Online Learning</title>
+
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/resources/front/img/logo/favicon.png}">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/resources/back/dist/css/adminlte.min.css}"/>
+    <!-- CSS here  -->
+    <link rel="stylesheet" th:href="@{/resources/front/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/meanmenu.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/slick.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/font-awesome-pro.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/elegent-icons.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/spacing.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/main.css}">
+    <!-- css end  here-->
+
+    <style>
+        .custom-file-label {
+            height: calc(2.25rem + 0px);
+        }
+        .product-name img {
+            width: 3.2rem;
+            height: 3.2rem;
+            float: left;
+            margin: 0;
+            margin-right: 0.8rem
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- back to top start -->
+<button class="tp-backtotop">
+    <span><i class="fal fa-angle-double-up"></i></span>
+</button>
+<!-- back to top end -->
+
+<div class="body-overlay"></div>
+<!-- offcanvas area end -->
+
+<div th:replace="~{fragments/front/header :: header}"></div>
+
+<main>
+
+    <div class="breadcrumb__area include-bg pt-200 pb-150 breadcrumb__overlay"
+         th:attr="data-background=@{/resources/front/img/breadcrumb/breadcrumb-bg.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="breadcrumb__content p-relative z-index-1">
+                        <h3 class="breadcrumb__title">Thanh Toán</h3>
+                        <div class="breadcrumb__list">
+                            <span><a href="/">Trang Chủ</a></span>
+                            <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                            <span>Thanh Toán</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="checkout-area pb-70" style="margin-top: 80px">
+        <div class="container">
+            <form method="post"
+                  enctype="multipart/form-data"
+                  th:action="@{/checkout}"
+                  th:object="${orderDTO}"
+            >
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="checkbox-form">
+                            <h3>Thông Tin Thanh Toán</h3>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+                                        <label>Họ & Tên</label>
+                                        <input type="text" th:value="${orderDTO.accountDTO.fullName}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+                                        <label>Địa Chỉ Email</label>
+                                        <input type="text" th:value="${orderDTO.accountDTO.email}" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+                                        <label style="color: red">Hóa Đơn<span class="required">*</span></label>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" name="invoiceMul"
+                                                   accept="image/png, image/jpg, image/jpeg" id="invoiceMul"
+                                                   required>
+                                            <label class="custom-file-label" for="invoiceMul">Chọn Hình Ảnh</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="your-order mb-30 ">
+                            <h3>Khóa Học</h3>
+                            <div class="your-order-table table-responsive">
+                                <table>
+                                    <tbody>
+                                    <tr class="cart_item">
+                                        <td class="product-name d-flex align-items-center">
+                                            <img th:src="@{${orderDTO.courseDTO.avatar}}" alt="">
+                                            <span th:text="${orderDTO.courseDTO.title}"></span>
+                                        </td>
+                                        <td class="product-total" style="padding: 15px 5px">
+                                            <span class="amount mr-10"
+                                                  style="font-weight: 700; font-size: 15px"
+                                                  th:text="${orderDTO.courseDTO.newPrice} + ' VNĐ'">
+                                            </span>
+                                            <del style="font-size: 12px; float:right" th:text="${orderDTO.courseDTO.price} + ' VNĐ'"></del>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr class="cart-subtotal">
+                                        <th>Thành Tiền</th>
+                                        <td>
+                                            <strong>
+                                                <span class="amount" th:text="${orderDTO.courseDTO.newPrice} + ' VNĐ'"></span>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+                            <div class="payment-method">
+                                <div class="order-button-payment mt-20">
+                                    <input type="hidden" name="id" class="form-control" th:field="*{id}" />
+                                    <input type="hidden" name="${orderDTO.accountDTO.id}" th:field="${orderDTO.accountDTO.id}">
+                                    <input type="hidden" name="${orderDTO.courseDTO.id}" th:field="${orderDTO.courseDTO.id}">
+                                    <button type="submit" class="tp-submit-btn">Xác Nhận Thanh Toán</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+</main>
+
+<div th:replace="~{fragments/front/footer :: footer}"></div>
+
+<!-- JS here -->
+<script th:src="@{/resources/front/js/vendor/jquery.js}"></script>
+<script th:src="@{/resources/front/js/vendor/waypoints.js}"></script>
+<script th:src="@{/resources/front/js/bootstrap-bundle.js}"></script>
+<script th:src="@{/resources/front/js/meanmenu.js}"></script>
+<script th:src="@{/resources/front/js/slick.js}"></script>
+<script th:src="@{/resources/front/js/magnific-popup.js}"></script>
+<script th:src="@{/resources/front/js/parallax.js}"></script>
+<script th:src="@{/resources/front/js/nice-select.js}"></script>
+<script th:src="@{/resources/front/js/counterup.js}"></script>
+<script th:src="@{/resources/front/js/wow.js}"></script>
+<script th:src="@{/resources/front/js/isotope-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/imagesloaded-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/ajax-form.js}"></script>
+<script th:src="@{/resources/front/js/countdown.js}"></script>
+<script th:src="@{/resources/front/js/main.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+<script>
+    $(document).ready(function () {
+      bsCustomFileInput.init()
+    })
+</script>
+</body>
+</html>

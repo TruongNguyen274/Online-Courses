@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Giới Thiệu | Online Learning</title>
+
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/resources/front/img/logo/favicon.png}">
+
+    <!-- CSS here  -->
+    <link rel="stylesheet" th:href="@{/resources/front/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/meanmenu.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/slick.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/font-awesome-pro.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/elegent-icons.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/spacing.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/main.css}">
+    <!-- css end  here-->
+</head>
+
+<body>
+
+<!-- back to top start -->
+<button class="tp-backtotop">
+    <span><i class="fal fa-angle-double-up"></i></span>
+</button>
+<!-- back to top end -->
+
+<div class="body-overlay"></div>
+<!-- offcanvas area end -->
+
+<div th:replace="~{fragments/front/header :: header}"></div>
+
+<main>
+
+    <!-- breadcrumb area start -->
+    <div class="breadcrumb__area include-bg pt-200 pb-150 breadcrumb__overlay"
+         th:attr="data-background=@{/resources/front/img/breadcrumb/breadcrumb-bg.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="breadcrumb__content p-relative z-index-1">
+                        <h3 class="breadcrumb__title">Giới Thiệu</h3>
+                        <div class="breadcrumb__list">
+                            <span><a href="/">Trang Chủ</a></span>
+                            <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                            <span>Giới Thiệu</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb area end -->
+
+    <!-- about section  start -->
+    <div class="tp-about__section pt-120 pb-90">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <div class="tp-about__img-wrapper d-md-flex p-relative">
+                        <div class="tp-about__img-large w-img mb-30">
+                            <img th:src="@{/resources/front/img/about/about-1.jpg}" alt="">
+                        </div>
+                        <div class="tp-about__img-sm w-img mb-30">
+                            <img th:src="@{/resources/front/img/about/about-2.jpg}" alt="">
+                        </div>
+
+                        <div class="tp-about-shapes">
+                            <div class="tp-about__shapes-1">
+                                <img th:src="@{/resources/front/img/icons/about-shapes.png}" alt="">
+                                <div class="tp-about__shapes-2 ">
+                                    <img th:src="@{/resources/front/img/icons/ring-shape.png}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="tp-section__title-wrapper">
+                        <h3 class="tp-section__title mb-15">HỌC VIỆN ONLINE</h3>
+                        <p class="mb-40">Online Learning là một hệ thống đào tạo trực tuyến,
+                            cổng kết nối Chuyên gia với Học viên</p>
+
+                        <div class="tp-about__feature-list mb-40">
+                            <ul>
+                                <li><span><i class="icon_check"></i></span>Học mọi lúc, mọi nơi</li>
+                                <li><span><i class="icon_check"></i></span>Tương tác với giảng viên</li>
+                                <li><span><i class="icon_check"></i></span>Chi phí hợp lý</li>
+                            </ul>
+                        </div>
+                        <div class="tp-hero__btn-wrappper">
+                            <a href="/register" class="tp-border-btn br-0">
+                                <span>Đăng Ký Tài Khoản Miễn Phí</span>
+                                <div class="transition"></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- about section end  -->
+
+    <!-- cta start-->
+    <div class="tp-cta-2__section p-relative pt-50 pb-20 p-relative" th:attr="data-background=@{/resources/front/img/bg/cta-shape-2.jpg}">
+        <div class="tp-cta-2__shape">
+            <img th:src="@{/resources/front/img/icons/ring-2.png}" alt="">
+        </div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="tp-cta__info mb-30">
+                        <h3 class="tp-section__title text-white mb-25">Học bất cứ lúc nào<br> bất cứ nơi đâu!</h3>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="tp-cta-2__img text-lg-end mb-30">
+                        <img src="assets/img/icons/cta-img-2.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- newsletter end -->
+
+
+
+</main>
+
+<div th:replace="~{fragments/front/footer :: footer}"></div>
+
+<!-- JS here -->
+<script th:src="@{/resources/front/js/vendor/jquery.js}"></script>
+<script th:src="@{/resources/front/js/vendor/waypoints.js}"></script>
+<script th:src="@{/resources/front/js/bootstrap-bundle.js}"></script>
+<script th:src="@{/resources/front/js/meanmenu.js}"></script>
+<script th:src="@{/resources/front/js/slick.js}"></script>
+<script th:src="@{/resources/front/js/magnific-popup.js}"></script>
+<script th:src="@{/resources/front/js/parallax.js}"></script>
+<script th:src="@{/resources/front/js/nice-select.js}"></script>
+<script th:src="@{/resources/front/js/counterup.js}"></script>
+<script th:src="@{/resources/front/js/wow.js}"></script>
+<script th:src="@{/resources/front/js/isotope-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/imagesloaded-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/ajax-form.js}"></script>
+<script th:src="@{/resources/front/js/countdown.js}"></script>
+<script th:src="@{/resources/front/js/main.js}"></script>
+</body>
+
+</html>

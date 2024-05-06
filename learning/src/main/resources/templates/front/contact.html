@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Liên Hệ | Online Learning</title>
+
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/resources/front/img/logo/favicon.png}">
+
+    <!-- CSS here  -->
+    <link rel="stylesheet" th:href="@{/resources/front/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/meanmenu.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/slick.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/font-awesome-pro.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/elegent-icons.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/spacing.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/main.css}">
+    <!-- css end  here-->
+</head>
+
+<body>
+
+<!-- back to top start -->
+<button class="tp-backtotop">
+    <span><i class="fal fa-angle-double-up"></i></span>
+</button>
+<!-- back to top end -->
+
+<div class="body-overlay"></div>
+<!-- offcanvas area end -->
+
+<div th:replace="~{fragments/front/header :: header}"></div>
+
+<main>
+
+    <!-- breadcrumb area start -->
+    <div class="breadcrumb__area include-bg pt-200 pb-150 breadcrumb__overlay"
+         th:attr="data-background=@{/resources/front/img/breadcrumb/breadcrumb-bg.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="breadcrumb__content p-relative z-index-1">
+                        <h3 class="breadcrumb__title">Liên Hệ</h3>
+                        <div class="breadcrumb__list">
+                            <span><a href="/">Trang Chủ</a></span>
+                            <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                            <span>Liên Hệ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb area end -->
+
+
+    <!-- contact area start -->
+    <section class="contact__area pt-115 pb-120">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-7 col-xl-7 col-lg-6">
+                    <div class="contact__wrapper">
+                        <div class="section__title-wrapper mb-40">
+                            <h2 class="section__title">Liên Hệ</h2>
+                            <p>Mọi thắc mắc vui lòng liên hệ với chúng tôi</p>
+                        </div>
+                        <div class="contact__form mb-30">
+                            <form action="" id="contact-form">
+                                <div class="row">
+                                    <div class="col-xxl-6 col-xl-6 col-md-6">
+                                        <div class="contact__form-input">
+                                            <input type="text" placeholder="Họ và Tên" name="name">
+                                        </div>
+                                    </div>
+                                    <div class="col-xxl-6 col-xl-6 col-md-6">
+                                        <div class="contact__form-input">
+                                            <input type="email" placeholder="Địa chỉ Email" name="email">
+                                        </div>
+                                    </div>
+                                    <div class="col-xxl-12">
+                                        <div class="contact__form-input">
+                                            <input type="text" placeholder="Tiêu Đề" name="subject">
+                                        </div>
+                                    </div>
+                                    <div class="col-xxl-12">
+                                        <div class="contact__form-input">
+                                            <textarea placeholder="Nội Dung" name="message"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-xxl-12">
+                                        <div class="contact__btn">
+                                            <button type="submit" class="tp-btn"><span>Gửi Yêu Cầu</span> </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="contact-response">
+                            <p class="ajax-response"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-4 offset-xxl-1 col-xl-4 offset-xl-1 col-lg-5 offset-lg-1">
+                    <div class="contact__info white-bg p-relative z-index-1">
+                        <div class="contact__info-inner white-bg">
+                            <ul>
+                                <li>
+                                    <div class="contact__info-item d-flex align-items-start mb-35">
+                                        <div class="contact__info-icon mr-15">
+                                            <svg class="map" viewBox="0 0 24 24">
+                                                <path class="st0" d="M21,10c0,7-9,13-9,13s-9-6-9-13c0-5,4-9,9-9S21,5,21,10z"/>
+                                                <circle class="st0" cx="12" cy="10" r="3"/>
+                                            </svg>
+                                        </div>
+                                        <div class="contact__info-text">
+                                            <h4>Địa Chỉ</h4>
+                                            <p><a target="_blank" href="">123 Phan Bội Châu - TPHCM</a></p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="contact__info-item d-flex align-items-start mb-35">
+                                        <div class="contact__info-icon mr-15">
+                                            <svg class="mail" viewBox="0 0 24 24">
+                                                <path class="st0" d="M4,4h16c1.1,0,2,0.9,2,2v12c0,1.1-0.9,2-2,2H4c-1.1,0-2-0.9-2-2V6C2,4.9,2.9,4,4,4z"/>
+                                                <polyline class="st0" points="22,6 12,13 2,6 "/>
+                                            </svg>
+                                        </div>
+                                        <div class="contact__info-text">
+                                            <h4>Email</h4>
+                                            <p><a href="mailto:hotro@learning.com">hotro@learning.com</a></p>
+                                            <p><a href="mailto:tuvan@learning.com">tuvan@learning.com</a></p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="contact__info-item d-flex align-items-start mb-35">
+                                        <div class="contact__info-icon mr-15">
+                                            <svg class="call" viewBox="0 0 24 24">
+                                                <path class="st0" d="M22,16.9v3c0,1.1-0.9,2-2,2c-0.1,0-0.1,0-0.2,0c-3.1-0.3-6-1.4-8.6-3.1c-2.4-1.5-4.5-3.6-6-6  c-1.7-2.6-2.7-5.6-3.1-8.7C2,3.1,2.8,2.1,3.9,2C4,2,4.1,2,4.1,2h3c1,0,1.9,0.7,2,1.7c0.1,1,0.4,1.9,0.7,2.8c0.3,0.7,0.1,1.6-0.4,2.1  L8.1,9.9c1.4,2.5,3.5,4.6,6,6l1.3-1.3c0.6-0.5,1.4-0.7,2.1-0.4c0.9,0.3,1.8,0.6,2.8,0.7C21.3,15,22,15.9,22,16.9z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="contact__info-text">
+                                            <h4>Điện Thoại</h4>
+                                            <p><a href="tel:+(426)-742-26-44">+(84) 0939589092</a></p>
+                                            <p><a href="tel:+(224)-762-442-32">+(84) 0939589090</a></p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="contact__social pl-30">
+                                <h4>Theo Dõi Chúng Tôi Tại</h4>
+                                <ul>
+                                    <li><a href="#" class="fb" ><i class="social_facebook"></i></a></li>
+                                    <li><a href="#" class="tw" ><i class="social_twitter"></i></a></li>
+                                    <li><a href="#" class="pin" ><i class="social_pinterest"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- contact area end -->
+
+</main>
+
+<div th:replace="~{fragments/front/footer :: footer}"></div>
+<!-- JS here -->
+<script th:src="@{/resources/front/js/vendor/jquery.js}"></script>
+<script th:src="@{/resources/front/js/vendor/waypoints.js}"></script>
+<script th:src="@{/resources/front/js/bootstrap-bundle.js}"></script>
+<script th:src="@{/resources/front/js/meanmenu.js}"></script>
+<script th:src="@{/resources/front/js/slick.js}"></script>
+<script th:src="@{/resources/front/js/magnific-popup.js}"></script>
+<script th:src="@{/resources/front/js/parallax.js}"></script>
+<script th:src="@{/resources/front/js/nice-select.js}"></script>
+<script th:src="@{/resources/front/js/counterup.js}"></script>
+<script th:src="@{/resources/front/js/wow.js}"></script>
+<script th:src="@{/resources/front/js/isotope-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/imagesloaded-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/ajax-form.js}"></script>
+<script th:src="@{/resources/front/js/countdown.js}"></script>
+<script th:src="@{/resources/front/js/main.js}"></script>
+</body>
+
+</html>

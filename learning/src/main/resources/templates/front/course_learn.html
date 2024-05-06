@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>[[${lectureDTO.title}]] | Online Learning</title>
+
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/resources/front/img/logo/favicon.png}">
+
+    <!-- CSS here  -->
+    <link rel="stylesheet" th:href="@{/resources/front/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/meanmenu.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/slick.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/font-awesome-pro.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/elegent-icons.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/spacing.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/main.css}">
+    <!-- css end  here-->
+
+    <style>
+        .course__curriculum-content {
+            padding: 10px !important;
+        }
+        .course__member-thumb::after {
+            display:none;
+        }
+        .disabled {
+            opacity: .5;
+            pointer-events: none;
+        }
+
+        .course__curriculum-info h3.exam {
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            display: -webkit-box;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- back to top start -->
+<button class="tp-backtotop">
+    <span><i class="fal fa-angle-double-up"></i></span>
+</button>
+<!-- back to top end -->
+
+<div class="body-overlay"></div>
+<!-- offcanvas area end -->
+
+<div th:replace="~{fragments/front/header :: header}"></div>
+
+<main>
+
+    <div class="breadcrumb__area include-bg pt-200 pb-150 breadcrumb__overlay"
+         th:attr="data-background=@{/resources/front/img/breadcrumb/breadcrumb-bg-2.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="breadcrumb__content p-relative z-index-1">
+                        <h3 class="breadcrumb__title">[[${courseDTO.title}]]</h3>
+                        <div class="breadcrumb__list">
+                            <span><a href="/">Trang Chủ</a></span>
+                            <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                            <span>Khóa Học</span>
+                            <span class="dvdr"><i class="fa-regular fa-angle-right"></i></span>
+                            <span>[[${lectureDTO.title}]]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="postbox__area pt-100 pb-60">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="page__title-content mb-25">
+                        <h1 class="page__title" th:text="${lectureDTO.title}"></h1>
+                    </div>
+                    <div class="course-details__content">
+                        <div class="course__img w-img mb-30" style="width: 756px; height: 425px">
+                            <th:block th:if="${lectureDTO.linkVideo} != null">
+                                <video controls width="756px">
+                                    <source th:src="${lectureDTO.linkVideo}" type="video/mp4">
+                                </video>
+                            </th:block>
+                        </div>
+                        <div class="course__tab-2 mb-45 position-relative">
+                            <ul class="nav nav-tabs" id="courseTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active"
+                                            id="description-tab"
+                                            data-bs-toggle="tab"
+                                            data-bs-target="#description"
+                                            type="button" role="tab"
+                                            aria-controls="description"
+                                            aria-selected="true">
+                                        <i class="icon_ribbon_alt"></i>
+                                        <span>Mô Tả</span>
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link"
+                                            id="review-tab"
+                                            data-bs-toggle="tab"
+                                            data-bs-target="#review"
+                                            type="button" role="tab"
+                                            aria-controls="review"
+                                            aria-selected="false">
+                                        <i class="icon_star_alt"></i>
+                                        <span>Hỏi Đáp</span>
+                                    </button>
+                                </li>
+                                <li class="nav-item position-relative" role="presentation">
+                                    <button class="nav-link"
+                                            id="member-tab"
+                                            data-bs-toggle="tab"
+                                            data-bs-target="#member"
+                                            type="button" role="tab"
+                                            aria-controls="member"
+                                            aria-selected="false">
+                                        <i class="fal fa-user"></i>
+                                        <span>Bài Thi</span>
+                                    </button>
+                                    <div class="position-absolute bg-danger d-flex justify-content-center align-items-center text-white rounded-circle fw-bold"
+                                         style="width: 25px; height: 25px; right: 8%; top: 25%"
+                                         th:text="${#lists.size(examDTOListByLecture)}"></div>
+                                </li>
+                                <li class="nav-item position-relative" role="presentation">
+                                    <button class="nav-link"
+                                            id="result-tab"
+                                            data-bs-toggle="tab"
+                                            data-bs-target="#result"
+                                            type="button" role="tab"
+                                            aria-controls="result"
+                                            aria-selected="false">
+                                        <i class="fal fa-user"></i>
+                                        <span>Kết Quả</span>
+                                    </button>
+                                    <div class="position-absolute bg-warning d-flex justify-content-center align-items-center text-white rounded-circle fw-bold"
+                                         style="width: 25px; height: 25px; right: 8%; top: 25%"
+                                         th:text="${#lists.size(resultDTOList)}"></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="course__tab-content mb-95">
+                        <div class="tab-content" id="courseTabContent">
+                            <div class="tab-pane fade active show" id="description" role="tabpanel"
+                                 aria-labelledby="description-tab">
+                                <div class="course__description">
+                                    <h3>Mô Tả</h3>
+                                    <p th:utext="${lectureDTO.content}"></p>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+                                <div class="course__review">
+                                    <h3 class="mb-3">Hỏi Đáp</h3>
+                                    <div class="course__comment mb-75">
+                                        <ul>
+                                            <li th:each="item : ${commentDTOList}">
+                                                <div class="course__comment-box ">
+                                                    <div class="course__comment-thumb float-start">
+                                                        <img th:src="@{/resources/front/img/testimonial/profile.png}"
+                                                             alt="">
+                                                    </div>
+                                                    <div class="course__comment-content">
+                                                        <div class="course__comment-wrapper ml-70 fix">
+                                                            <div class="course__comment-info float-start">
+                                                                <h4 th:text="${item.ownerDTO.fullName}"></h4>
+                                                                <span th:text="${item.createdDate}"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="course__comment-text ml-70">
+                                                            <p th:text="${item.content}"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="course__form">
+                                        <h3>Câu Hỏi</h3>
+                                        <div class="course__form-inner">
+                                            <form method="post"
+                                                  th:action="@{/comment/form}"
+                                                  th:object="${commentDTO}">
+                                                <div class="row">
+                                                    <div class="col-xxl-12">
+                                                        <div class="course__form-input">
+                                                            <textarea name="content" th:value="${content}"
+                                                                      placeholder="Bạn có thắc mắc gì trong bài học này?"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xxl-12">
+                                                        <div class="course__form-btn mt-10 mb-55">
+                                                            <input type="hidden" name="courseId"
+                                                                   th:value="${courseDTO.id}">
+                                                            <input type="hidden" name="lectureId"
+                                                                   th:value="${lectureDTO.id}">
+                                                            <button type="submit" class="tp-btn">
+                                                                <span>Bình Luận
+                                                                    <i class="fa-regular fa-arrow-right"></i></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="member" role="tabpanel" aria-labelledby="member-tab">
+                                <h3>Bài Thi</h3>
+                                <div class="course__comment mb-75">
+                                    <ul>
+                                        <th:block th:if="${#lists.size(examDTOListByLecture) > 0}">
+                                            <li th:each="item : ${examDTOListByLecture}">
+                                                <div class="course__comment-box">
+                                                    <div class="course__comment-content">
+                                                        <div class="course__comment-wrapper fix d-flex justify-content-between align-items-center">
+                                                            <div class="course__comment-info mb-0" style="width: 35%">
+                                                                <a class="fw-bold d-block"
+                                                                   th:href="@{'/exam/' + ${item.id} + '?courseId=' + ${courseDTO.id}}"
+                                                                   th:text="${item.title}"></a>
+                                                            </div>
+                                                            <div class="course__comment-rating float-start float-sm-end">
+                                                                <span> Thời Gian Làm Bài - [[${item.totalTime}]]</span>
+                                                            </div>
+                                                            <div class="course__comment-info mb-0">
+                                                                <th:block th:switch="${item.type}">
+                                                                    <span class="badge bg-success"
+                                                                          th:case="'Tự Luận'">Tự Luận</span>
+                                                                    <span class="badge bg-info"
+                                                                          th:case="'Trắc Nghiệm'">Trắc Nghiệm</span>
+                                                                </th:block>
+                                                            </div>
+                                                        </div>
+                                                        <div class="course__comment-text ml-10">
+                                                            <p th:text="${item.description}">
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </th:block>
+                                        <th:block th:if="${#lists.size(examDTOListByLecture) <= 0}">
+                                            <li>
+                                                <h5 class="text-danger">Hiện Chưa Có Bài Thi</h5>
+                                            </li>
+                                        </th:block>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="result" role="tabpanel" aria-labelledby="result-tab">
+                                <h3>Kết Quả</h3>
+                                <div class="course__member mb-45">
+                                    <div class="course__member-item" th:each="item : ${resultDTOList}">
+                                        <div class="row align-items-center">
+                                            <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-7 col-sm-8">
+                                                <div class="course__member-thumb d-flex align-items-center">
+                                                    <div class="course__member-name ml-20">
+                                                        <h5 th:text="${item.examDTO.title}"></h5>
+                                                        <span th:text="${item.endTime}"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-5 col-sm-5 col-4">
+                                                <div class="course__member-info" th:switch="${item.result}">
+                                                    <h6 class="badge bg-success" th:case="'PASSED'"> Đã
+                                                        Đạt </h6>
+                                                    <h6 class="badge bg-danger" th:case="'FAILED'">Chưa Hoàn
+                                                        Thành</h6>
+                                                    <h6 class="badge bg-danger" th:case="'PROGRESS'">Đang Chấm
+                                                        Điểm</h6>
+                                                    <span class="ms-3" th:if="${item.result != 'PROGRESS'}">Kết Quả - [[${item.score}]]</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-12">
+                    <div class="sidebar__widget mb-40">
+                        <h3 class="sidebar__widget-title">Nội Dung Khóa Học</h3>
+                        <div class="course__curriculum">
+                            <th:block th:each="chapter : ${chapterDTOList}">
+                                <div class="accordion"
+                                     th:attr="id='course__accordion_'+${chapter.id}">
+                                    <div class="accordion-item mb-20">
+                                        <h2 class="accordion-header"
+                                            th:attr="id='week-' + ${chapter.id}">
+                                            <button
+                                                    style="padding: 10px 20px 10px;"
+                                                    class="accordion-button"
+                                                    type="button"
+                                                    data-bs-toggle="collapse"
+                                                    th:attr="data-bs-target='#week-' + ${chapter.id} + '-content',
+                                                            aria-controls='week-' + ${chapter.id} + '-content'"
+                                                    aria-expanded="true"
+                                                    th:text="${chapter.title}"
+                                            >
+                                            </button>
+                                        </h2>
+                                        <div
+                                                class="accordion-collapse collapse show"
+                                                th:attr="id='week-' + ${chapter.id} + '-content',
+                                                       aria-labelledby='week-' + ${chapter.id},
+                                                       data-bs-parent='#course__accordion_' + ${chapter.id}">
+
+                                            <div class="accordion-body">
+                                                <th:block th:each="lecture, lectureStat : ${chapter.lectureList}">
+                                                    <div class="course__curriculum-content"
+                                                         th:classappend="${chapter.examPassed == true && lecture.examPassed == true ? '' : 'disabled'}"
+                                                    >
+                                                        <a th:href="@{'/course/learn?courseId=' + ${courseDTO.id} + '&lectureId=' + ${lecture.id}}"
+                                                           class="d-sm-flex flex-column"
+                                                        >
+                                                            <div class="course__curriculum-info">
+                                                                <h3 th:text="${lectureStat.index + 1} + '. ' + ${lecture.title}"></h3>
+                                                            </div>
+                                                        </a>
+
+                                                        <div class="course__curriculum-meta d-sm-flex flex-row justify-content-between align align-items-center">
+                                                            <div class="course__curriculum-meta mt-5 mb-5 ml-10">
+                                                                <th:block th:if="${lecture.timeLesson} != null">
+                                                                    <span class="time"> <i class="icon_clock_alt"></i> [[${lecture.timeLesson}]]</span>
+                                                                </th:block>
+                                                            </div>
+                                                            <th:block
+                                                                    th:if="${lecture.linkResource} != null AND ${lecture.linkResource} != ''">
+                                                                <a th:href="@{${lecture.linkResource}}" target="_blank"
+                                                                   class="question course__curriculum-info">
+                                                                    <svg class="document"
+                                                                         style="width: 16px; height: 16px; margin-right: 7px; color: #949db1;"
+                                                                         viewBox="0 0 24 24">
+                                                                        <path class="st0"
+                                                                              d="M14,2H6C4.9,2,4,2.9,4,4v16c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V8L14,2z"></path>
+                                                                        <polyline class="st0"
+                                                                                  points="14,2 14,8 20,8 "></polyline>
+                                                                        <line class="st0" x1="16" y1="13" x2="8"
+                                                                              y2="13"></line>
+                                                                        <line class="st0" x1="16" y1="17" x2="8"
+                                                                              y2="17"></line>
+                                                                        <polyline class="st0"
+                                                                                  points="10,9 9,9 8,9 "></polyline>
+                                                                    </svg>
+                                                                    Resource
+                                                                </a>
+                                                            </th:block>
+                                                        </div>
+                                                    </div>
+                                                </th:block>
+                                                <div class="course__curriculum-content"
+                                                     th:if="${#lists.size(chapter.examDTOList) > 0}">
+                                                    <h5 class="mb-0">Kiểm Tra Chương</h5>
+                                                </div>
+                                                <th:block th:each="exam, examStat : ${chapter.examDTOList}">
+                                                    <div class="course__curriculum-content d-flex justify-content-between align-items-center"
+                                                         th:classappend="${exam.examPassed == true ? '' : 'disabled'}"
+                                                    >
+                                                        <div class="col-md-6">
+                                                            <a th:href="@{'/exam/' + ${exam.id} + '?courseId=' + ${courseDTO.id}}"
+                                                               class="d-sm-flex flex-column"
+                                                            >
+                                                                <div class="course__curriculum-info">
+                                                                    <h3 class="exam"
+                                                                        th:text="${examStat.index + 1} + '. ' + ${exam.title}"></h3>
+                                                                </div>
+
+                                                                <div class="course__comment-info mb-0">
+                                                                    <th:block th:switch="${exam.type}">
+                                                                        <span class="badge bg-success mt-3"
+                                                                              th:case="'Tự Luận'">Tự Luận</span>
+                                                                        <span class="badge bg-info mt-3"
+                                                                              th:case="'Trắc Nghiệm'">Trắc Nghiệm</span>
+                                                                    </th:block>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="course__curriculum-meta d-flex align-items-center justify-content-between">
+                                                                <div class="course__curriculum-meta mt-5 mb-5 ml-10">
+                                                                    <span class="time"> <i class="icon_clock_alt"></i> [[${exam.totalTime}]]</span>
+                                                                </div>
+
+                                                                <div class="course__curriculum-meta"
+                                                                     th:if="${exam.result != null}"
+                                                                     th:switch="${exam.result}"
+                                                                >
+                                                                        <span class="time" th:case="'PASSED'"
+                                                                              style="color: green; font-size: 20px;">
+                                                                            <i class="fal fa-check-circle"></i>
+                                                                        </span>
+                                                                    <span class="time" th:case="'FAILED'"
+                                                                          style="color: red; font-size: 20px;">
+                                                                                <i class="fal fa-times-circle"></i>
+                                                                        </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </th:block>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <th:block th:if="${#lists.size(examDTOListByCourse) > 0}">
+                                <div class="accordion" id="course__accordion_1000">
+                                    <div class="accordion-item mb-20">
+                                        <h2 class="accordion-header"
+                                            th:attr="id='week-1000'">
+                                            <button
+                                                    style="padding: 10px 20px 10px;"
+                                                    class="accordion-button"
+                                                    type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#week-1000-content"
+                                                    aria-controls="week-1000-content"
+                                                    aria-expanded="true"
+                                            >
+                                                Kiểm Tra Khóa Học
+                                            </button>
+                                        </h2>
+                                        <div class="accordion-collapse collapse show"
+                                             id="week-1000-content"
+                                             aria-labelledby="week-1000"
+                                             data-bs-parent="#course__accordion_1000">
+
+                                            <div class="accordion-body">
+                                                <th:block th:each="examCourse, examCourseStat : ${examDTOListByCourse}">
+                                                    <div class="course__curriculum-content d-flex justify-content-between align-items-center"
+                                                         th:classappend="${examCourse.examPassed == true ? '' : 'disabled'}"
+                                                    >
+                                                        <div class="col-md-6">
+                                                            <a th:href="@{'/exam/' + ${examCourse.id} + '?courseId=' + ${courseDTO.id}}"
+                                                               class="d-sm-flex flex-column"
+                                                            >
+                                                                <div class="course__curriculum-info">
+                                                                    <h3 class="exam"
+                                                                        th:text="${examCourseStat.index + 1} + '. ' + ${examCourse.title}"></h3>
+                                                                </div>
+
+                                                                <div class="course__comment-info mb-0"
+                                                                     th:switch="${examCourse.type}">
+                                                                        <span class="badge bg-success mt-3"
+                                                                              th:case="'Tự Luận'">Tự Luận</span>
+                                                                    <span class="badge bg-info mt-3"
+                                                                          th:case="'Trắc Nghiệm'">Trắc Nghiệm</span>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="course__curriculum-meta d-flex align-items-center justify-content-between">
+                                                                <div class="course__curriculum-meta mt-5 mb-5 ml-10">
+                                                                    <span class="time"> <i class="icon_clock_alt"></i> [[${examCourse.totalTime}]]</span>
+                                                                </div>
+
+                                                                <div class="course__curriculum-meta"
+                                                                     th:if="${examCourse.result != null}"
+                                                                     th:switch="${examCourse.result}"
+                                                                >
+                                                                        <span class="time" th:case="'PASSED'"
+                                                                              style="color: green; font-size: 20px;">
+                                                                            <i class="fal fa-check-circle"></i>
+                                                                        </span>
+                                                                    <span class="time" th:case="'FAILED'"
+                                                                          style="color: red; font-size: 20px;">
+                                                                                <i class="fal fa-times-circle"></i>
+                                                                        </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </th:block>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<div th:replace="~{fragments/front/footer :: footer}"></div>
+
+<!-- JS here -->
+<script th:src="@{/resources/front/js/vendor/jquery.js}"></script>
+<script th:src="@{/resources/front/js/vendor/waypoints.js}"></script>
+<script th:src="@{/resources/front/js/bootstrap-bundle.js}"></script>
+<script th:src="@{/resources/front/js/meanmenu.js}"></script>
+<script th:src="@{/resources/front/js/slick.js}"></script>
+<script th:src="@{/resources/front/js/magnific-popup.js}"></script>
+<script th:src="@{/resources/front/js/parallax.js}"></script>
+<script th:src="@{/resources/front/js/nice-select.js}"></script>
+<script th:src="@{/resources/front/js/counterup.js}"></script>
+<script th:src="@{/resources/front/js/wow.js}"></script>
+<script th:src="@{/resources/front/js/isotope-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/imagesloaded-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/ajax-form.js}"></script>
+<script th:src="@{/resources/front/js/countdown.js}"></script>
+<script th:src="@{/resources/front/js/main.js}"></script>
+</body>
+
+</html>

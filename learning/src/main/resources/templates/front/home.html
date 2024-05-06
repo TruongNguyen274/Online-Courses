@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Trang Chủ | Online Learning</title>
+
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/resources/front/img/logo/favicon.png}">
+
+    <!-- CSS here  -->
+    <link rel="stylesheet" th:href="@{/resources/front/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/meanmenu.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/slick.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/font-awesome-pro.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/elegent-icons.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/spacing.css}">
+    <link rel="stylesheet" th:href="@{/resources/front/css/main.css}">
+    <!-- css end  here-->
+</head>
+
+<body>
+
+<!-- back to top start -->
+<button class="tp-backtotop">
+    <span><i class="fal fa-angle-double-up"></i></span>
+</button>
+<!-- back to top end -->
+
+<div class="body-overlay"></div>
+<!-- offcanvas area end -->
+
+<div th:replace="~{fragments/front/header :: header}"></div>
+
+<main>
+
+    <!-- slider start  -->
+    <div class="tp-slider__section p-relative">
+        <div class="tp-slilder-active">
+            <div
+                    class="tp-slider__item  tp-slider__height tp-slider__overlay d-flex justify-content-center align-items-center"
+                    th:attr="data-background=@{/resources/front/img/slider/slider-2.1.jpg}">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="tp-slider__content text-center">
+                                <h2 class="tp-slider__title text-white" data-animation="fadeInUp" data-delay="0.5s">
+                                    KHOÁ HỌC ONLINE
+                                </h2>
+                                <p class="text-white" data-animation="fadeInUp" data-delay="0.7s">
+                                    Chia sẻ kiến thức và kinh nghiệm thực tế tới hàng triệu người.
+                                </p>
+                                <div class="tp-slider__btn-wrappper p-relative z-index-1" data-animation="fadeInUp"
+                                     data-delay="0.9s">
+                                    <a href="/register" class="tp-transparent-btn">
+                                        <span>Đăng Ký Tài Khoản Miễn Phí <i class="fa-regular fa-arrow-right"></i></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                    class="tp-slider__item  tp-slider__height tp-slider__overlay d-flex justify-content-center align-items-center"
+                    th:attr="data-background=@{/resources/front/img/slider/slider-2.2.jpg}">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="tp-slider__content text-center">
+                                <h2 class="tp-slider__title text-white" data-animation="fadeInUp" data-delay="0.5s">
+                                    HỌC MỌI LÚC, MỌI NƠI
+                                </h2>
+                                <p class="text-white" data-animation="fadeInUp" data-delay="0.7s">
+                                    Chỉ cần máy tính hoặc một chiếc điện thoại bạn đã có thể học một cách thuận tiện.
+                                </p>
+                                <div class="tp-slider__btn-wrappper" data-animation="fadeInUp" data-delay="0.9s">
+                                    <a href="/register" class="tp-transparent-btn">
+                                        <span>Đăng Ký Tài Khoản Miễn Phí <i class="fa-regular fa-arrow-right"></i></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                    class="tp-slider__item  tp-slider__height tp-slider__overlay d-flex justify-content-center align-items-center"
+                    th:attr="data-background=@{/resources/front/img/slider/slider-2.3.jpg}">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="tp-slider__content text-center">
+                                <h2 class="tp-slider__title text-white" data-animation="fadeInUp" data-delay="0.5s">Grow
+                                    HỢP TÁC GIẢNG DẠY
+                                </h2>
+                                <p class="text-white" data-animation="fadeInUp" data-delay="0.7s">
+                                    Mọi thông tin hợp tác và giảng dạy xin vui lòng liên hệ với chúng tôi ngay hôm nay.
+                                </p>
+                                <div class="tp-slider__btn-wrappper" data-animation="fadeInUp" data-delay="0.9s">
+                                    <a href="/register" class="tp-transparent-btn">
+                                        <span>Đăng Ký Tài Khoản Miễn Phí <i class="fa-regular fa-arrow-right"></i></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tp-slider__arrows">
+        </div>
+    </div>
+    <!-- slider end  -->
+
+    <!-- feature start  -->
+    <div class="tp-feature-2__section">
+        <div class="container">
+            <div class="row gx-0">
+                <div class="col-md-4">
+                    <div class="tp-feature-2__item tp-feature-2__color-1 d-lg-flex">
+                        <div class="tp-feature-2__icon mr-20">
+                            <span><i class="fa-thin fa-laptop-code"></i></span>
+                        </div>
+                        <div class="tp-feature-2__content">
+                            <h3 class="tp-feature-2__title">Tương Tác Nhanh</h3>
+                            <p>Tương tác đa chiều trực tiếp dưới mỗi video bài giảng</p>
+                            <div class="tp-feature-2__wrapper">
+                                <span><a href="/contact"><i class="fa-regular fa-arrow-right"></i></a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tp-feature-2__item tp-feature-2__color-2 d-lg-flex">
+                        <div class="tp-feature-2__icon mr-20">
+
+                            <span><i class="fa-thin fa-cloud-arrow-down"></i></span>
+                        </div>
+                        <div class="tp-feature-2__content">
+                            <h3 class="tp-feature-2__title">Bài Giảng Số</h3>
+                            <p>Hệ sinh thái 5000+ tài liệu cùng bài giảng hiện đại
+                            </p>
+                            <div class="tp-feature-2__wrapper">
+                                <span><a href="/contact"><i class="fa-regular fa-arrow-right"></i></a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="tp-feature-2__item tp-feature-2__color-3 d-lg-flex">
+                        <div class="tp-feature-2__icon mr-20">
+                            <span><i class="fa-thin fa-file-certificate"></i></span>
+                        </div>
+                        <div class="tp-feature-2__content">
+                            <h3 class="tp-feature-2__title">Chứng Chỉ Số</h3>
+                            <p>Theo dõi, tra cứu tiến độ, kết quả học tập và chứng chỉ</p>
+                            <div class="tp-feature-2__wrapper">
+                                <span><a href="/contact"><i class="fa-regular fa-arrow-right"></i></a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- feature end  -->
+
+    <!-- about section  start -->
+    <div class="tp-about-2__section pt-120 pb-90 p-relative fix">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="tp-about-2__img-wrapper p-relative">
+                        <div class="tp-about-2__img w-img mb-30">
+                            <img th:src="@{/resources/front/img/about/about-2.jpg}" alt="">
+                        </div>
+                        <div class="tp-about-2-shapes">
+                            <div class="tp-about-2__shapes-1">
+                                <img th:src="@{/resources/front/img/icons/dots-shapes-2.png}" alt="">
+                            </div>
+                            <div class="tp-about-2__shapes-2 ">
+                                <img th:src="@{/resources/front/img/icons/theme-circle.png}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="tp-about-2__right ml-110">
+                        <div class="tp-section__title-wrapper">
+                            <h3 class="tp-section__title mb-15">Bạn chưa tìm thấy khóa học mình quan tâm?</h3>
+                            <p class="mb-40">Chúng tôi đang hiện có hơn 2.000 khóa học đang chờ bạn khám phá!</p>
+
+                            <div class="tp-about-2__feature-list mb-10">
+                                <ul>
+                                    <li><span><i class="fa-light fa-user-group"></i></span>Giảng viên uy tín</li>
+                                    <li><span><i class="fa-light fa-file-pen"></i></span>Tài liệu độc quyền</li>
+                                    <li><span><i class="fa-light fa-chart-pie-simple"></i></span>Học mọi lúc mọi nơi</li>
+                                    <li><span><i class="fa-light fa-bars-progress"></i></span>Hỗ trợ trực tiếp</li>
+                                </ul>
+                            </div>
+                            <div class="tp-hero__btn-wrappper">
+                                <a href="/register" class="tp-btn">
+                                    <span>Đăng Ký Tài Khoản Miễn Phí <i class="fa-regular fa-arrow-right"></i></span>
+                                    <div class="transition"></div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="tp-about-2__shapes">
+            <div class="tp-about-2__shapes-8">
+                <img th:src="@{/resources/front/img/icons/lines-shape.png}" alt="">
+            </div>
+            <div class="tp-about-2__shapes-3">
+                <img th:src="@{/resources/front/img/icons/role-shape-2.png}" alt="">
+            </div>
+            <div class="tp-about-2__shapes-4 ">
+                <img th:src="@{/resources/front/img/icons/book-blue.png}" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- about section end  -->
+
+    <!-- course start  -->
+    <div class="tp-courses-2__section grey-bg-2 pt-120 pb-90">
+        <div class="container">
+            <div class="row align-items-end">
+                <div class="col-lg-8">
+                    <div class="tp-section__title-wrapper mb-40">
+                        <h3 class="tp-section__title mb-15">Khoá Học Nổi Bật</h3>
+                        <p>Sứ mệnh của chúng tôi là chia sẻ kiến thức thực tiễn tới hàng triệu người dân Việt Nam.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="tp-cta__btn-wrappper d-flex justify-content-lg-end mb-45 p-relative z-index-1">
+                        <a href="/courses" class="tp-white-btn">
+                            <span>Xem Thêm <i class="fa-regular fa-arrow-right"></i></span>
+                            <div class="transition"></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="tp-courses-2__tab-content">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6" th:each="item : ${courseListDTO}">
+                        <div class="tp-courses-2__item mb-30">
+                            <div class="tp-courses-2__thumb w-img fix p-relative">
+                                <a th:href="@{'/course' + '?courseId=' + ${item.id}}">
+                                    <img th:src="@{${item.avatar}}" th:alt="${item.title}" style="max-height: 250px">
+                                </a>
+                            </div>
+                            <div class="tp-courses-2__content white-bg">
+                                <div class="tp-courses-2__meta d-flex justify-content-between align-items-center">
+                                    <span class="tp-courses-2__cat cat-color-1">
+                                         <a th:href="@{'/course' + '?courseId=' + ${item.id}}"
+                                            th:text="${item.categoryDTO.title}"></a>
+                                    </span>
+                                    <span class="tp-courses-2__price" th:text="${item.newPrice} + ' VNĐ'"></span>
+                                </div>
+                                <h3 class="tp-courses-2__title">
+                                    <a th:href="@{'/course' + '?courseId=' + ${item.id}}"
+                                       th:text="${item.title}"></a>
+                                </h3>
+                                <div class="tp-courses-2__bottom d-md-flex justify-content-between align-items-center">
+                                    <div class="tp-courses-2__sub">
+                                        <span th:text="${item.lecture} + ' Bài Học'"><i class="far fa-book-alt"></i></span>
+                                    </div>
+                                    <div class="tp-courses-2__review">
+                                 <span>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                 </span>
+                                        <span>(20 votes)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- course end  -->
+
+    <!-- cta start-->
+    <div class="tp-cta-2__section p-relative pt-50 pb-20 p-relative" th:attr="data-background=@{/resources/front/bg/cta-shape-2.jpg}">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="tp-cta__info mb-30">
+                        <h3 class="tp-section__title text-white mb-25">Quickly get updates about <br>
+                            class event and news!</h3>
+                        <div class="tp-cta-2__form p-relative">
+                            <form>
+                                <div class="tp-cta-2__field">
+                                    <input type="text" placeholder="Enter Your Email">
+                                </div>
+                                <button class="tp-cta-2__btn" type="submit">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="tp-cta-2__img text-lg-end mb-30">
+                        <img th:src="@{/resources/front/img/icons/cta-img-2.png}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- newsletter end -->
+
+</main>
+
+<div th:replace="~{fragments/front/footer :: footer}"></div>
+
+<!-- JS here -->
+<script th:src="@{/resources/front/js/vendor/jquery.js}"></script>
+<script th:src="@{/resources/front/js/vendor/waypoints.js}"></script>
+<script th:src="@{/resources/front/js/bootstrap-bundle.js}"></script>
+<script th:src="@{/resources/front/js/meanmenu.js}"></script>
+<script th:src="@{/resources/front/js/slick.js}"></script>
+<script th:src="@{/resources/front/js/magnific-popup.js}"></script>
+<script th:src="@{/resources/front/js/parallax.js}"></script>
+<script th:src="@{/resources/front/js/nice-select.js}"></script>
+<script th:src="@{/resources/front/js/counterup.js}"></script>
+<script th:src="@{/resources/front/js/wow.js}"></script>
+<script th:src="@{/resources/front/js/isotope-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/imagesloaded-pkgd.js}"></script>
+<script th:src="@{/resources/front/js/ajax-form.js}"></script>
+<script th:src="@{/resources/front/js/countdown.js}"></script>
+<script th:src="@{/resources/front/js/main.js}"></script>
+</body>
+
+</html>
